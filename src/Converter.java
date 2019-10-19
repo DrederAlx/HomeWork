@@ -55,3 +55,4 @@ public class Converter {
         System.out.println("Перевод в шестнадцатиричную систему: " + s1);
     }
 }
+// test
