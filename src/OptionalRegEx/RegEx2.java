@@ -1,3 +1,5 @@
+package OptionalRegEx;
+
 public class RegEx2 {
     public static void main(String[] args) {
         // даны два слова, состоящие из четного количества букв
