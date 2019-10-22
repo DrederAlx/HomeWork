@@ -7,9 +7,9 @@ public class RegEx1 {
         // имеются 2 строки. Найти вхождений
         // одной строки в другую (сколько раз встречается подстрока в строке)
 
-        String str = "Это тестовый текст для тестового поиска тестовой подстроки. Тест";
-        String str1 = "тест";
-        Pattern patt = Pattern.compile(str1, Pattern.CASE_INSENSITIVE);
+        String str = "java test Java test java TEST JAVA";
+        String str1 = "java";
+        Pattern patt = Pattern.compile(str1, Pattern.CASE_INSENSITIVE); // Поиск без учета регистра не работает для кириллицы
         Matcher matcher = patt.matcher(str);
         int i = 0;
         while (matcher.find()) {
