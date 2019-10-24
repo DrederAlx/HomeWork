@@ -20,6 +20,14 @@ public class Library {
 
     public void addBook(Book... newBooks) { // при передаче в метод нескольких книг в методе newBooks станет массивом
 
+        for (int i = 0; i < this.books.length; i++) {
+            if (this.books[i] == null) {
+                System.arraycopy(newBooks, 0, this.books, i, newBooks.length);
+                break;
+            }
+        }
+    }
+        /*
         for (int i = 0; i < newBooks.length; i++) {
             for (int j = 0; j < this.books.length; j++) {
                 if (this.books[j] == null) {
@@ -29,10 +37,12 @@ public class Library {
             }
         }
     }
+    */
 
         /* должна быть возможность получать информацию по книге, указав ее название
         (получаемая информация: автор, название, можно ли забрать домой, доступна ли книга)
         если книга не найдена сообщаем что такой книги нет */
+
         public String getInfo(String title){
             return "Книга найдена. Название: . Автор: . " +
                     "Доступна в читальном зале/для выдачи на дом." +
