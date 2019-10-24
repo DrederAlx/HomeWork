@@ -17,25 +17,26 @@ public class Main {
         java.setTitle("Философия Java");
         cleanCode.setTitle("Чистый код");
 
-        System.out.println(java.getTitle()); // у объекта java вызываем метод getTitle
-        System.out.println(cleanCode.getTitle());
+        // System.out.println(java.getTitle()); // у объекта java вызываем метод getTitle
+        // System.out.println(cleanCode.getTitle());
 
         java.setAuthor("Брюс Эккель");
         cleanCode.setAuthor("Роберт Мартин");
 
         java.setIsAvailable(true);
         java.setIsForHome(true);
-
+        java.setIsTakenHome(true);
         Book forBeginners = new Book("Руководство для начинающих", "Герберт Шилдт");
 
-        System.out.println(java);
-        System.out.println(cleanCode);
-        System.out.println(forBeginners);
+        // System.out.println(java);
+        // System.out.println(cleanCode);
+        // System.out.println(forBeginners);
 
         Library library = new Library();
         library.addBook(java);
         library.addBook(cleanCode, forBeginners);
-        System.out.println(library);
+        // System.out.println(library);
+        System.out.println(library.getInfo("Философия Java"));
 
     }
 }

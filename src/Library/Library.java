@@ -43,13 +43,28 @@ public class Library {
         (получаемая информация: автор, название, можно ли забрать домой, доступна ли книга)
         если книга не найдена сообщаем что такой книги нет */
 
-        public String getInfo(String title){
-            return "Книга найдена. Название: . Автор: . " +
-                    "Доступна в читальном зале/для выдачи на дом." +
-                    "Для выдачи доступна/пока не доступна";
-        }
+        public String getInfo(String title) { // String это тип объекта который возвращает метод
+            String s = "";
+            String isAvailableTxt = "";
+            String isForHomeTxt = "";
+            boolean isFind = false;
+            for (int i = 0; i < this.books.length; i++) {
+                if (this.books[i] != null && this.books[i].getTitle().equals(title)) {
+                    s = "Книга найдена. \nНазвание: " + this.books[i].getTitle() + ".\n" + "Автор: " +
+                            this.books[i].getAuthor() + ".\n" + this.books[i].getIsAvailable() + ".\n" +
+                            this.books[i].getIsForHome() + ".\n" + this.books[i].getIsTakenHome();
+                    isFind = true;
+                    break;
+                }
+            }
+                if (!isFind) {
+                    s = "Книга не найдена";
+                }
+            return s;
+            }
         // должна быть возможность взять книгу на дом, указав название
         public Book takeHome (String title){
+
             Book returnBook = null;
             // определяем есть ли книга в библиотеке и можно ли ее вызять и не взял ли ее кто то другой
             return returnBook;

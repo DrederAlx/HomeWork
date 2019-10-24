@@ -7,6 +7,7 @@ public class Book {
     private String author; // модификатор доступа private говорит о том что доступ к свойству элемента доступен только внутри класса (между {})
     private boolean isAvailable; // null - значение по умолчанию для ссылочных типов
     private boolean isForHome;
+    private boolean isTakenHome;
 
     // Конструкторы
 
@@ -16,6 +17,7 @@ public class Book {
         setAuthor(author);
     }
     public Book(String title){
+
         setTitle(title);
     }
 
@@ -51,9 +53,13 @@ public class Book {
     }
 
     public void setIsForHome(boolean isForHome){
+
         this.isForHome = isForHome;
     }
 
+    public void setIsTakenHome(boolean isTakenHome) {
+        this.isTakenHome = isTakenHome;
+    }
     // геттеры - это методы, которые возвращают значение свойств
 
     public String getTitle() { // здесь String это тип возвращаемого значения
@@ -65,13 +71,39 @@ public class Book {
         return author;
     }
 
-    public boolean isAvailable() {
-
-        return isAvailable;
+    public String getIsAvailable() {
+        String isAvailableTxt = "";
+        if (this.isAvailable) {
+            isAvailableTxt = "Доступна в читальном зале";
+        }
+        else {
+            isAvailableTxt = "Не доступна в читальном зале";
+        }
+        return isAvailableTxt;
     }
 
-    public boolean isForHome() {
+    public String getIsForHome() {
+        String isForHomeTxt = "";
+        if (this.isForHome) {
+            isForHomeTxt = "Эту книгу можно брать на дом";
+        }
+        else {
+            isForHomeTxt = "Эту книгу нельзя брать на дом";
+        }
+        return isForHomeTxt;
+    }
 
-        return isForHome;
+    public String getIsTakenHome() {
+        String isTakenHomeTxt = "";
+        if (this.isTakenHome && this.isForHome) {
+            isTakenHomeTxt = "Эту книгу уже взяли на дом.";
+        }
+        else if (!this.isTakenHome && this.isForHome) {
+            isTakenHomeTxt = "Эта книга находится в библиеотеке и ее можно взять на дом.";
+        }
+        else {
+            isTakenHomeTxt = "";
+        }
+        return isTakenHomeTxt;
     }
 }
