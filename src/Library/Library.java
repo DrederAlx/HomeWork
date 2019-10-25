@@ -45,13 +45,11 @@ public class Library {
 
         public String getInfo(String title) { // String это тип объекта который возвращает метод
             String s = "";
-            String isAvailableTxt = "";
-            String isForHomeTxt = "";
             boolean isFind = false;
             for (int i = 0; i < this.books.length; i++) {
                 if (this.books[i] != null && this.books[i].getTitle().equals(title)) {
                     s = "Книга найдена. \nНазвание: " + this.books[i].getTitle() + ".\n" + "Автор: " +
-                            this.books[i].getAuthor() + ".\n" + this.books[i].getIsAvailable() + ".\n" +
+                            this.books[i].getAuthor() + ".\n" + this.books[i].getIsAvailableTxt() + ".\n" +
                             this.books[i].getIsForHomeTxt() + ".\n" + this.books[i].getIsTakenHomeTxt();
                     isFind = true;
                     break;
@@ -76,14 +74,6 @@ public class Library {
             }
             return returnBook;
         }
-
-    @Override
-    public String toString() {
-        return "Library{" +
-                "books=" + Arrays.toString(books) +
-                '}';
-    }
-
     public Book[] getBooks() {
         return books;
     }

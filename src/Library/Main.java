@@ -1,5 +1,7 @@
 package Library;
 
+import java.util.Arrays;
+
 public class Main {
     public static void main(String[] args) {
         Book java = new Book();
@@ -38,7 +40,7 @@ public class Main {
         Library library = new Library();
         library.addBook(java);
         library.addBook(cleanCode, forBeginners);
-        // System.out.println(library);
+        System.out.println(Arrays.toString(library.getBooks()));
         System.out.println(library.getInfo("Философия Java"));
         System.out.println(library.takeHome("Чистый код"));
         System.out.println(library.takeHome("Чистый код"));

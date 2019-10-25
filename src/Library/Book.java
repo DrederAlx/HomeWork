@@ -71,7 +71,7 @@ public class Book {
         return author;
     }
 
-    public String getIsAvailable() {
+    public String getIsAvailableTxt() {
         String isAvailableTxt = "";
         if (this.isAvailable) {
             isAvailableTxt = "Доступна в читальном зале";
