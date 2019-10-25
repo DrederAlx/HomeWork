@@ -82,7 +82,7 @@ public class Book {
         return isAvailableTxt;
     }
 
-    public String getIsForHome() {
+    public String getIsForHomeTxt() {
         String isForHomeTxt = "";
         if (this.isForHome) {
             isForHomeTxt = "Эту книгу можно брать на дом";
@@ -93,17 +93,25 @@ public class Book {
         return isForHomeTxt;
     }
 
-    public String getIsTakenHome() {
+    public String getIsTakenHomeTxt() {
         String isTakenHomeTxt = "";
         if (this.isTakenHome && this.isForHome) {
             isTakenHomeTxt = "Эту книгу уже взяли на дом.";
         }
         else if (!this.isTakenHome && this.isForHome) {
-            isTakenHomeTxt = "Эта книга находится в библиеотеке и ее можно взять на дом.";
+            isTakenHomeTxt = "Эта книга находится в библиеотеке.";
         }
         else {
             isTakenHomeTxt = "";
         }
         return isTakenHomeTxt;
+    }
+
+    public boolean getIsForHome() {
+        return isForHome;
+    }
+
+    public boolean getIsTakenHome() {
+        return isTakenHome;
     }
 }

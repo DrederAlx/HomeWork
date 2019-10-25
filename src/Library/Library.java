@@ -52,7 +52,7 @@ public class Library {
                 if (this.books[i] != null && this.books[i].getTitle().equals(title)) {
                     s = "Книга найдена. \nНазвание: " + this.books[i].getTitle() + ".\n" + "Автор: " +
                             this.books[i].getAuthor() + ".\n" + this.books[i].getIsAvailable() + ".\n" +
-                            this.books[i].getIsForHome() + ".\n" + this.books[i].getIsTakenHome();
+                            this.books[i].getIsForHomeTxt() + ".\n" + this.books[i].getIsTakenHomeTxt();
                     isFind = true;
                     break;
                 }
@@ -63,12 +63,19 @@ public class Library {
             return s;
             }
         // должна быть возможность взять книгу на дом, указав название
-        public Book takeHome (String title){
-
+        public Book takeHome (String title) {
             Book returnBook = null;
-            // определяем есть ли книга в библиотеке и можно ли ее вызять и не взял ли ее кто то другой
+            for (int i = 0; i < this.books.length; i++) {
+                if (this.books[i] != null && this.books[i].getTitle().equals(title) && this.books[i].getIsForHome() && !this.books[i].getIsTakenHome()) {
+                    returnBook = this.books[i];
+                    this.books[i].setIsTakenHome(true);
+                }
+
+                // определяем есть ли книга в библиотеке и можно ли ее вызять и не взял ли ее кто то другой
+
+            }
             return returnBook;
-    }
+        }
 
     @Override
     public String toString() {

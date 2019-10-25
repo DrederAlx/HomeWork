@@ -26,6 +26,9 @@ public class Main {
         java.setIsAvailable(true);
         java.setIsForHome(true);
         java.setIsTakenHome(true);
+        cleanCode.setIsAvailable(true);
+        cleanCode.setIsForHome(true);
+        cleanCode.setIsTakenHome(false);
         Book forBeginners = new Book("Руководство для начинающих", "Герберт Шилдт");
 
         // System.out.println(java);
@@ -37,6 +40,7 @@ public class Main {
         library.addBook(cleanCode, forBeginners);
         // System.out.println(library);
         System.out.println(library.getInfo("Философия Java"));
-
+        System.out.println(library.takeHome("Чистый код"));
+        System.out.println(library.takeHome("Чистый код"));
     }
 }
