@@ -25,5 +25,3 @@ public class RegEx3 {
         System.out.println(strArr[pos]);
     }
 }
-
-// CHECK SECOND LAPTOP
