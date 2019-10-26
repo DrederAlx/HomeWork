@@ -1,7 +1,5 @@
 package Library;
 
-import java.util.Arrays;
-
 public class Library {
     private Book[] books = new Book[10];
 
@@ -49,8 +47,8 @@ public class Library {
             for (int i = 0; i < this.books.length; i++) {
                 if (this.books[i] != null && this.books[i].getTitle().equals(title)) {
                     s = "Книга найдена. \nНазвание: " + this.books[i].getTitle() + ".\n" + "Автор: " +
-                            this.books[i].getAuthor() + ".\n" + this.books[i].getIsAvailableTxt() + ".\n" +
-                            this.books[i].getIsForHomeTxt() + ".\n" + this.books[i].getIsTakenHomeTxt();
+                            this.books[i].getAuthor() + ".\n" + this.books[i].IsAvailableTxt() + ".\n" +
+                            this.books[i].IsForHomeTxt() + ".\n" + this.books[i].IsTakenHomeTxt();
                     isFind = true;
                     break;
                 }

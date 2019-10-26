@@ -58,6 +58,7 @@ public class Book {
     }
 
     public void setIsTakenHome(boolean isTakenHome) {
+
         this.isTakenHome = isTakenHome;
     }
     // геттеры - это методы, которые возвращают значение свойств
@@ -68,10 +69,11 @@ public class Book {
     }
 
     public String getAuthor() {
+
         return author;
     }
 
-    public String getIsAvailableTxt() {
+    public String IsAvailableTxt() {
         String isAvailableTxt = "";
         if (this.isAvailable) {
             isAvailableTxt = "Доступна в читальном зале";
@@ -82,7 +84,7 @@ public class Book {
         return isAvailableTxt;
     }
 
-    public String getIsForHomeTxt() {
+    public String IsForHomeTxt() {
         String isForHomeTxt = "";
         if (this.isForHome) {
             isForHomeTxt = "Эту книгу можно брать на дом";
@@ -93,7 +95,7 @@ public class Book {
         return isForHomeTxt;
     }
 
-    public String getIsTakenHomeTxt() {
+    public String IsTakenHomeTxt() {
         String isTakenHomeTxt = "";
         if (this.isTakenHome && this.isForHome) {
             isTakenHomeTxt = "Эту книгу уже взяли на дом.";
