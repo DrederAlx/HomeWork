@@ -47,14 +47,14 @@ public class Book {
         }
     }
 
-    public void setIsAvailable(boolean isAvailable) {
-
-        this.isAvailable = isAvailable;
-    }
-
     public void setIsForHome(boolean isForHome){
-
         this.isForHome = isForHome;
+        if (isForHome) {
+            isAvailable = false;
+        }
+        else {
+            isAvailable = true;
+        }
     }
 
     public void setIsTakenHome(boolean isTakenHome) {
@@ -76,10 +76,7 @@ public class Book {
     public String IsAvailableTxt() {
         String isAvailableTxt = "";
         if (this.isAvailable) {
-            isAvailableTxt = "Доступна в читальном зале";
-        }
-        else {
-            isAvailableTxt = "Не доступна в читальном зале";
+            isAvailableTxt = "Можно читать в зале.\n";
         }
         return isAvailableTxt;
     }
@@ -87,10 +84,7 @@ public class Book {
     public String IsForHomeTxt() {
         String isForHomeTxt = "";
         if (this.isForHome) {
-            isForHomeTxt = "Эту книгу можно брать на дом";
-        }
-        else {
-            isForHomeTxt = "Эту книгу нельзя брать на дом";
+            isForHomeTxt = "Эту книгу можно брать на дом.\n";
         }
         return isForHomeTxt;
     }
@@ -102,9 +96,6 @@ public class Book {
         }
         else if (!this.isTakenHome && this.isForHome) {
             isTakenHomeTxt = "Эта книга находится в библиеотеке.";
-        }
-        else {
-            isTakenHomeTxt = "";
         }
         return isTakenHomeTxt;
     }

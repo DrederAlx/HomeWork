@@ -25,24 +25,18 @@ public class Main {
         java.setAuthor("Брюс Эккель");
         cleanCode.setAuthor("Роберт Мартин");
 
-        java.setIsAvailable(true);
-        java.setIsForHome(true);
-        java.setIsTakenHome(true);
-        cleanCode.setIsAvailable(true);
-        cleanCode.setIsForHome(true);
-        cleanCode.setIsTakenHome(false);
-        Book forBeginners = new Book("Руководство для начинающих", "Герберт Шилдт");
+        java.setIsForHome(false);
 
-        // System.out.println(java);
-        // System.out.println(cleanCode);
-        // System.out.println(forBeginners);
+        cleanCode.setIsForHome(true);
+
+        Book forBeginners = new Book("Руководство для начинающих", "Герберт Шилдт");
 
         Library library = new Library();
         library.addBook(java);
         library.addBook(cleanCode, forBeginners);
+
         System.out.println(Arrays.toString(library.getBooks()));
         System.out.println(library.getInfo("Философия Java"));
-        System.out.println(library.takeHome("Чистый код"));
         System.out.println(library.takeHome("Чистый код"));
     }
 }
