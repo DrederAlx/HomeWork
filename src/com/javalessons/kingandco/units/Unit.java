@@ -17,15 +17,24 @@ abstract public class Unit implements RestAble {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name != null && !"".equals(name)) {
+            this.name = name;
+        }
     }
 
     public void setHealth(int health) {
-        this.health = health;
+        if (health > 0) {
+            this.health = health;
+        }
+        else if (health <= 0) {
+            this.health = 0;
+        }
     }
 
     public void setSpeed(int speed) {
-        this.speed = speed;
+        if (speed > 0) {
+            this.speed = speed;
+        }
     }
 
     public String getName() {

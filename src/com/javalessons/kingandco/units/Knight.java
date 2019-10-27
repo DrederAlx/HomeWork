@@ -6,7 +6,14 @@ public class Knight extends BattleUnit {
     }
     @Override
     public void attack(Unit enemy) {
-        System.out.println("Рыцарь атаковал " + enemy.getName());
+        if (enemy.getHealth() > 0) {
+            enemy.setHealth(enemy.getHealth() - (this.getAttackScore() + (int) (this.getHealth() * 0.1)));
+            System.out.println("Рыцарь атаковал " + enemy.getName() + " на " + (this.getAttackScore()
+                    + (int) (this.getHealth() * 0.1)) + " очков");
+        }
+        else {
+            System.out.println("Враг мертв, его нельзя атаковать");
+        }
     }
 
     @Override

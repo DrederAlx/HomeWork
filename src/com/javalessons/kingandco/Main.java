@@ -11,22 +11,31 @@ public class Main {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         System.out.println("Укажите тип персонажа");
-        String userChoice = in.nextLine();
+        String userChoice;
         // warrior knight doctor
         BattleUnit battleUnit = null;
-        if ("warrior".equals(userChoice)){
-            battleUnit = new Warrior("Воин", 3, 20, 15);
+        while (battleUnit == null) {
+            userChoice = in.nextLine();
+            if ("warrior".equals(userChoice)) {
+                battleUnit = new Warrior("Воин", 3, 20, 15);
+            } else if ("knight".equals(userChoice)) {
+                battleUnit = new Knight("Рыцарь", 4, 22, 18);
+            } else if ("doctor".equals(userChoice)) {
+                battleUnit = new Doctor("Доктор", 2, 40, 5);
+            } else {
+                System.out.println("Вы неверно указали тип персонажа ");
+            }
         }
-        else if ("knight".equals(userChoice)) {
-            battleUnit = new Knight("Рыцарь", 4, 22, 18);
-        }
-        else if ("doctor".equals(userChoice)) {
-            battleUnit = new Doctor("Доктор", 2, 40, 5);
-        }
+
         battleUnit.run();
         System.out.println("Ваш выбор " + battleUnit);
         BattleUnit enemyChoice = new Knight("Рыцарь противника", 4, 23, 17);
-        battleUnit.attack(enemyChoice);
+        BattleUnit testUnit = new Warrior("Тестовый Воин", 3,20,15);
+        System.out.println(testUnit);
+        battleUnit.attack(testUnit);
+        System.out.println(testUnit);
+        System.out.println(battleUnit);
+
         // ^ это полиморфизм наследования
 
         // наследование - это extends - расширение функционала родительского класса дочерним

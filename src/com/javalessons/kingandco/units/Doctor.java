@@ -6,7 +6,13 @@ public class Doctor extends BattleUnit {
     }
     @Override
     public void attack(Unit friend) {
-        System.out.println("Доктор вылечил  " + friend.getName());
+        if (friend.getHealth() > 0) {
+            friend.setHealth(friend.health + (this.getAttackScore() + this.getSpeed()));
+            System.out.println("Доктор вылечил " + friend.getName() + " на " + (this.getAttackScore() + this.getSpeed()) + " очков");
+        }
+        else {
+            System.out.println("Пациент мертв, лечение тут не поможет. Нужен некромант");
+        }
     }
 
     @Override
