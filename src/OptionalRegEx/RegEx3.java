@@ -8,7 +8,7 @@ public class RegEx3 {
         // найти самое длинное слово в предложении
         // (при условии, что все слова разной длинны)
         String str = "Съешь! еще! этих! мягких? французских, булочек.";
-        Pattern pattern = Pattern.compile("[А-Яа-я ]");
+        Pattern pattern = Pattern.compile("[А-Яа-я Ёё]");
         Matcher matcher = pattern.matcher(str);
         StringBuilder builder = new StringBuilder();
         while (matcher.find()) builder.append(matcher.group());
