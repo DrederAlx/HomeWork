@@ -1,8 +1,5 @@
 package CatsWarriorsApples;
 
-import javax.sound.midi.Soundbank;
-import java.sql.SQLOutput;
-
 public class Main {
     public static void main(String[] args) {
         Cat sirok = new Cat ("Сырок", 8, 17);
