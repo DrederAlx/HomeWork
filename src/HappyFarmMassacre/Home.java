@@ -13,4 +13,16 @@ public class Home extends Animals {
         this.resources = resources;
         this.eatable = eatable;
     }
+
+    @Override
+    public String toString() {
+        return "Home{" +
+                "name='" + name + '\'' +
+                ", health=" + health +
+                ", resources=" + resources +
+                ", eatable=" + eatable +
+                ", weight=" + weight +
+                ", speed=" + speed +
+                '}';
+    }
 }
