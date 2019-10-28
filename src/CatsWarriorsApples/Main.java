@@ -13,4 +13,4 @@ public class Main {
         System.out.println(kuzma.catInfo());
         System.out.println(gosha.catInfo());
     }
-}
+}// test
