@@ -1,6 +1,6 @@
-package HappyFarmMassacre;
+package HappyFarmMassacre.animals;
 
-public class Home extends Animals {
+public class Home extends Animal {
     protected String name;
     protected int health;
     protected int resources;

@@ -1,4 +1,4 @@
-package HappyFarmMassacre;
+package HappyFarmMassacre.animals;
 
 public class Chicken extends Home{
     public Chicken(int weight, int speed, String name, int health, int resources, boolean eatable) {

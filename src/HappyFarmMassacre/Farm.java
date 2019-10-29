@@ -1,5 +1,7 @@
 package HappyFarmMassacre;
 
+import HappyFarmMassacre.animals.*;
+
 import java.util.Arrays;
 
 public class Farm {
