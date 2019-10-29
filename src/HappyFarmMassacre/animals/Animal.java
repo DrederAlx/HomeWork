@@ -8,4 +8,14 @@ public class Animal {
         this.weight = weight;
         this.speed = speed;
     }
+    public Animal() {
+    }
+
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
 }

@@ -1,9 +1,9 @@
 package HappyFarmMassacre.animals;
 
-public class Wild extends Animal {
+public class WildAnimal extends Animal {
     protected int attackScore;
 
-    public Wild(int weight, int speed, int attackScore) {
+    public WildAnimal(int weight, int speed, int attackScore) {
         super(weight, speed);
         this.attackScore = attackScore;
     }
