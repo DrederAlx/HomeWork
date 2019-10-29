@@ -41,7 +41,7 @@ public class Farm {
 
 
     }
-    public HomeAnimal[] getHomeAnimals() {
+    public HomeAnimal[] homeAnimals() {
 
         return homeAnimals;
     }

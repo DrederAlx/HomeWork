@@ -33,6 +33,14 @@ public class HomeAnimal extends Animal {
         this.eatable = eatable;
     }
 
+    public boolean isEatable() {
+        return eatable;
+    }
+
+    public int getResources() {
+        return resources;
+    }
+
     public void setMaxHealth(int maxHealth) {
         this.maxHealth = maxHealth;
     }

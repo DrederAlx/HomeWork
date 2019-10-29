@@ -9,8 +9,22 @@ public class Farmer {
     public void spendRes() {
         this.setResFarmer(this.getResFarmer() - (this.getResFarmer() - 10));
     }
-    public void collectRes(){
-        this.setResFarmer(this.getResFarmer() + 10);
+    public void collectRes(Farm farmName){
+        boolean canCollect = false;
+        for (int i = 0; i < farmName.homeAnimals().length; i++) {
+            if (farmName.homeAnimals()[i].getResources() != 0)
+                canCollect = true;
+        }
+        for (int i = 0; i < farmName.homeAnimals().length; i++) {
+            if (canCollect && farmName.homeAnimals()[i] != null && farmName.homeAnimals()[i].getResources() != 0){
+                setResFarmer(this.getResFarmer() + farmName.homeAnimals()[i].getResources());
+                farmName.homeAnimals()[i].setResources(0);
+            }
+            else if (!canCollect && farmName.homeAnimals()[i] != null && farmName.homeAnimals()[i].isEatable()){
+                setResFarmer(this.getResFarmer() + farmName.homeAnimals()[i].getWeight());
+                farmName.homeAnimals()[i] = null;
+            }
+        }
     }
 
     public void setResFarmer(int resFarmer) {
@@ -19,5 +33,12 @@ public class Farmer {
 
     public int getResFarmer() {
         return resFarmer;
+    }
+
+    @Override
+    public String toString() {
+        return "Farmer{" +
+                "Количество ресурсов = " + resFarmer +
+                '}';
     }
 }
