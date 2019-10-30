@@ -5,10 +5,10 @@ public class Cat extends HomeAnimal {
         super(weight, speed, name, health, resources, eatable, maxHealth);
     }
     public Cat() {
-        String[] nameArr = {"Барсик", "Сырок", "Пупок", "Язь", "Пельмешек"};
+       // String[] nameArr = {"Барсик", "Сырок", "Пупок", "Язь", "Пельмешек"};
         int nameId;
-        nameId = (int) (Math.random() * nameArr.length);
-        this.setName(nameArr[nameId]);
+        nameId = (int) (Math.random() * catNames.length);
+        this.setName(catNames[nameId]);
         this.setResources(0);
         this.setWeight((int) (Math.random() * 6) + 4);
         this.setSpeed((int) (Math.random() * 6) + 10);

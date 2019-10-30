@@ -7,6 +7,11 @@ public class HomeAnimal extends Animal {
     protected boolean eatable;
     protected int maxHealth;
 
+    protected static String[] rabbitNames = {"Пончик", "Суслик", "Уголек", "Иннокентий", "Прыг"};
+    protected static String[] cowNames = {"Мадонна", "Ксения", "Березка", "Россия", "Жизель"};
+    protected static String[] catNames = {"Барсик", "Сырок", "Пупок", "Язь", "Пельмешек"};
+    protected static String[] chickenNames = {"Свистушка", "Несушка", "Ряба", "Айгуль", "Пеструшка"};
+
     public HomeAnimal(int weight, int speed, String name, int health, int resources, boolean eatable, int maxHealth) {
         super(weight, speed);
         this.name = name;
@@ -53,4 +58,5 @@ public class HomeAnimal extends Animal {
     public void setMaxHealth(int maxHealth) {
         this.maxHealth = maxHealth;
     }
+
 }
