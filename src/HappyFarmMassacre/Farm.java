@@ -38,9 +38,11 @@ public class Farm {
                     break;
             }
         }
-
+    }
+    public void dayPass(){
 
     }
+
     public HomeAnimal[] homeAnimals() {
 
         return homeAnimals;

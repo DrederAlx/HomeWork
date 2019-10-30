@@ -17,6 +17,15 @@ public class HomeAnimal extends Animal {
     }
     public HomeAnimal() {
     }
+    /*
+    protected static String randomName(){
+        String[] rabbitNames = {"Пончик", "Суслик", "Уголек", "Иннокентий", "Прыг"};
+        String[] cowNames = {"Мадонна", "Ксения", "Березка", "Россия", "Жизель"};
+        String[] catNames = {"Барсик", "Сырок", "Пупок", "Язь", "Пельмешек"};
+        String[] chickenNames = {"Свистушка", "Несушка", "Ряба", "Айгуль", "Пеструшка"};
+        return randomName();
+    }
+    */
     public void setName(String name) {
         this.name = name;
     }
