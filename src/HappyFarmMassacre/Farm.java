@@ -5,7 +5,7 @@ import HappyFarmMassacre.animals.*;
 import java.util.Arrays;
 
 public class Farm {
-    private HomeAnimal[] homeAnimals = new HomeAnimal[10];
+    protected HomeAnimal[] homeAnimals = new HomeAnimal[10];
 
     @Override
     public String toString() {
@@ -41,10 +41,5 @@ public class Farm {
     }
     public void dayPass(){
 
-    }
-
-    public HomeAnimal[] homeAnimals() {
-
-        return homeAnimals;
     }
 }

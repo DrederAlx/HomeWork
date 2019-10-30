@@ -5,7 +5,6 @@ public class Cat extends HomeAnimal {
         super(weight, speed, name, health, resources, eatable, maxHealth);
     }
     public Cat() {
-       // String[] nameArr = {"Барсик", "Сырок", "Пупок", "Язь", "Пельмешек"};
         int nameId;
         nameId = (int) (Math.random() * catNames.length);
         this.setName(catNames[nameId]);

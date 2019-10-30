@@ -6,10 +6,9 @@ public class Rabbit extends HomeAnimal {
     }
 
     public Rabbit() {
-        String[] nameArr = {"Пончик", "Суслик", "Уголек", "Иннокентий", "Прыг"};
         int nameId;
-        nameId = (int) (Math.random() * nameArr.length);
-        this.setName(nameArr[nameId]);
+        nameId = (int) (Math.random() * rabbitNames.length);
+        this.setName(rabbitNames[nameId]);
         this.setResources(0);
         this.setWeight((int) (Math.random() * 4) + 2);
         this.setSpeed((int) (Math.random() * 8) + 15);

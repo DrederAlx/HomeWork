@@ -6,10 +6,9 @@ public class Cow extends HomeAnimal {
     }
 
     public Cow() {
-        String[] nameArr = {"Мадонна", "Ксения", "Березка", "Россия", "Жизель"};
         int nameId;
-        nameId = (int) (Math.random() * nameArr.length);
-        this.setName(nameArr[nameId]);
+        nameId = (int) (Math.random() * cowNames.length);
+        this.setName(cowNames[nameId]);
         this.setResources((int) (Math.random() * 9) + 12);
         this.setWeight((int) (Math.random() * 11) + 20);
         this.setSpeed((int) (Math.random() * 6) + 5);

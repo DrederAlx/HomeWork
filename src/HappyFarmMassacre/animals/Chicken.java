@@ -6,10 +6,9 @@ public class Chicken extends HomeAnimal {
     }
 
     public Chicken() {
-        String[] nameArr = {"Свистушка", "Несушка", "Ряба", "Айгуль", "Пеструшка"};
         int nameId;
-        nameId = (int) (Math.random() * nameArr.length);
-        this.setName(nameArr[nameId]);
+        nameId = (int) (Math.random() * chickenNames.length);
+        this.setName(chickenNames[nameId]);
         this.setResources((int) (Math.random() * 8) + 8);
         this.setWeight((int) (Math.random() * 4) + 2);
         this.setSpeed((int) (Math.random() * 5) + 8);
