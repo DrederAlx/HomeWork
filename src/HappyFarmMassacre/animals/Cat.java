@@ -3,6 +3,13 @@ package HappyFarmMassacre.animals;
 public class Cat extends HomeAnimal {
     public Cat(int weight, int speed, String name, int health, int resources, boolean eatable, int maxHealth) {
         super(weight, speed, name, health, resources, eatable, maxHealth);
+        setWeight(weight);
+        setSpeed(speed);
+        setName(name);
+        setHealth(health);
+        setResources(resources);
+        setEatable(eatable);
+        setMaxHealth(maxHealth);
     }
     public Cat() {
         int nameId;

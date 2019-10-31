@@ -14,11 +14,11 @@ public class HomeAnimal extends Animal {
 
     public HomeAnimal(int weight, int speed, String name, int health, int resources, boolean eatable, int maxHealth) {
         super(weight, speed);
-        this.name = name;
-        this.health = health;
-        this.resources = resources;
-        this.eatable = eatable;
-        this.maxHealth = maxHealth;
+        setName(name);
+        setHealth(health);
+        setResources(resources);
+        setEatable(eatable);
+        setMaxHealth(maxHealth);
     }
     public HomeAnimal() {
     }
