@@ -23,24 +23,35 @@ public class Farmer {
                     farmName.homeAnimals[i].setResources(0);
                 }
             }
-        } else if (!canCollect) {
-            int pos = 0;
-            int maxWeight;
-            if (farmName.homeAnimals[pos] != null) {
-                maxWeight = farmName.homeAnimals[pos].getWeight();
-            } else {
-                maxWeight = 0;
-            }
-            for (int j = 1; j < farmName.homeAnimals.length; j++) {
-                if (farmName.homeAnimals[j] != null && farmName.homeAnimals[j].getWeight() > maxWeight) {
-                    pos = j;
-                    maxWeight = farmName.homeAnimals[j].getWeight();
+        }
+        else if (!canCollect) {
+            int pos = -1;
+            int maxWeight = 0;
+            boolean canEat = false;
+            for (int i = 0; i < farmName.homeAnimals.length; i++) {
+                if (farmName.homeAnimals[i] != null && farmName.homeAnimals[i].isEatable()){
+                    pos = i;
+                    maxWeight = farmName.homeAnimals[i].getWeight();
+                    canEat = true;
+                    break;
                 }
             }
-            setResFarmer(this.getResFarmer() + farmName.homeAnimals[pos].getWeight());
-            System.out.println("На ферме не осталось ресурсов и фермер скушал животное по имени " + farmName.homeAnimals[pos].getName() + " пополнив запас ресурсов на "
-                    + (this.getResFarmer() - resCount) + " едениц");
-            farmName.homeAnimals[pos] = null;
+            if(canEat) {
+                for (int j = pos + 1; j < farmName.homeAnimals.length; j++) {
+                    if (farmName.homeAnimals[j] != null && farmName.homeAnimals[j].getWeight() > maxWeight && farmName.homeAnimals[j].isEatable()) {
+                        pos = j;
+                        maxWeight = farmName.homeAnimals[j].getWeight();
+                    }
+                }
+                setResFarmer(this.getResFarmer() + farmName.homeAnimals[pos].getWeight());
+                System.out.println("На ферме не осталось ресурсов и фермер скушал животное по имени " + farmName.homeAnimals[pos].getName() + " пополнив запас ресурсов на "
+                        + (this.getResFarmer() - resCount) + " едениц");
+                farmName.homeAnimals[pos] = null;
+            }
+            else {
+                System.out.println("На ферме не осталось съедобных животных");
+            }
+
         }
         if (canCollect) {
             System.out.println("Фермер собрал " + (this.getResFarmer() - resCount) + " едениц ресурсов");
