@@ -23,6 +23,10 @@ public class HomeAnimal extends Animal {
     public HomeAnimal() {
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
