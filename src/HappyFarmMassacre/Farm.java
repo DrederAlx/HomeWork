@@ -6,6 +6,7 @@ import java.util.Arrays;
 
 public class Farm {
     protected HomeAnimal[] homeAnimals = new HomeAnimal[10];
+    protected Farmer farmer;
 
     @Override
     public String toString() {
@@ -40,6 +41,16 @@ public class Farm {
         }
     }
     public void dayPass(){
+        farmer.spendRes();
+       // farmer.collectRes();
 
+    }
+
+    public HomeAnimal[] getHomeAnimals() {
+        return homeAnimals;
+    }
+
+    public void setHomeAnimals(HomeAnimal[] homeAnimals) {
+        this.homeAnimals = homeAnimals;
     }
 }

@@ -7,8 +7,10 @@ public class Farmer {
         setResFarmer(resFarmer);
     }
     public void spendRes() {
+
         this.setResFarmer(this.getResFarmer() - (this.getResFarmer()/3));
     }
+
     public void collectRes(Farm farmName) {
         boolean canCollect = false;
         int resCount = this.resFarmer;
