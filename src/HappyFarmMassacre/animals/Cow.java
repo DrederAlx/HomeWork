@@ -22,8 +22,8 @@ public class Cow extends HomeAnimal {
         this.setMaxHealth(25);
         this.setHealth((int) (Math.random() * 6) + 20);
         this.setEatable(true);
-
     }
+
     @Override
     public String toString() {
         return "Cow{" +
