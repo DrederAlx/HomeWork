@@ -21,7 +21,6 @@ public class Cat extends HomeAnimal {
         this.setMaxHealth(10);
         this.setHealth((int) (Math.random() * 6) + 5);
         this.setEatable(false);
-
     }
 
     @Override
