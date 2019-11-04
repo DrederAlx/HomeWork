@@ -27,11 +27,27 @@ public class HomeAnimal extends Animal {
     }
 
     public void setResources(int resources) {
-        this.resources = resources;
+        if (resources < 0) {
+            this.resources = 0;
+        }
+        else if (resources > getMaxResources() && getMaxResources() != 0) {
+           this.resources = getMaxResources();
+        }
+        else {
+            this.resources = resources;
+        }
     }
 
     public void setHealth(int health) {
-        this.health = health;
+        if (health < 0) {
+            this.health = 0;
+        }
+        else if (health > getMaxHealth() && getMaxHealth() != 0){
+            this.health = getMaxHealth();
+        }
+        else {
+            this.health = health;
+        }
     }
 
     public void setEatable(boolean eatable) {

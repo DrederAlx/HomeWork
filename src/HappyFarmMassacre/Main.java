@@ -1,35 +1,26 @@
 package HappyFarmMassacre;
 
-import java.util.Arrays;
-
 public class Main {
     public static void main(String[] args) {
         Farm farm1 = new Farm();
-        Farmer farmer1 = new Farmer(20);
+        Farmer farmer1 = new Farmer(50);
         farm1.farmer = farmer1;
         farmer1.farm = farm1;
         farm1.addHomeAnimals();
         farm1.addWildAnimals();
-        System.out.println(farm1);
-        farm1.visitFarm();
-        System.out.println(farm1);
 
-
-
-
-        /*
-        System.out.println(farmer1);
-        System.out.println(Arrays.toString(farm1.homeAnimals));
-        farmer1.collectRes();
-        System.out.println(farmer1);
-        System.out.println(Arrays.toString(farm1.homeAnimals));
-        farmer1.collectRes();
-        System.out.println(farmer1);
-        System.out.println(Arrays.toString(farm1.homeAnimals));
-        farmer1.collectRes();
-        System.out.println(farmer1);
-        System.out.println(Arrays.toString(farm1.homeAnimals));
-         */
-
+        while (true) {
+            if (farmer1.getResFarmer() != 0 && farm1.ticketCheck()) {
+                farm1.dayPass();
+            }
+            else if (farmer1.getResFarmer() != 0 && !farm1.ticketCheck()){
+                System.out.println("Все дикие звери в ужасе засели в лесу, нервно поглядывая на ферму. Фермер победил.");
+                break;
+            }
+            else if (farmer1.getResFarmer() == 0){
+                System.out.println("У фермера закончились ресурсы и на ферме не осталось животных. Фермер проиграл.");
+                break;
+            }
+        }
     }
 }

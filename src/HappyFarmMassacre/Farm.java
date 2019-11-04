@@ -11,7 +11,7 @@ public class Farm {
 
     @Override
     public String toString() {
-        return  "homeAnimals=" + Arrays.toString(homeAnimals) + "\n" +
+        return "homeAnimals=" + Arrays.toString(homeAnimals) + "\n" +
                 "wildAnimals=" + Arrays.toString(wildAnimals) +
                 '}';
     }
@@ -42,10 +42,10 @@ public class Farm {
         }
     }
 
-    public void addWildAnimals(){
+    public void addWildAnimals() {
         WildAnimal newAn = null;
         for (int i = 0; i < wildAnimals.length; i++) {
-            switch (i){
+            switch (i) {
                 case 0:
                     newAn = new Fox();
                     wildAnimals[i] = newAn;
@@ -62,12 +62,12 @@ public class Farm {
         }
     }
 
-    public boolean canCollectCheck(){
+    public boolean canCollectCheck() {
         boolean canCollect = false;
         for (int i = 0; i < homeAnimals.length; i++) {
             if (homeAnimals[i] != null && homeAnimals[i].getResources() != 0) {
                 canCollect = true;
-            break;
+                break;
             }
         }
         return canCollect;
@@ -96,7 +96,7 @@ public class Farm {
         return canEat;
     }
 
-    public void eat(){
+    public void eat() {
         int pos = -1;
         int maxWeight = 0;
         for (int i = 0; i < homeAnimals.length; i++) {  // ищем первое съедобное животное, для последующего сравнения веса
@@ -114,31 +114,46 @@ public class Farm {
         }
         farmer.setResFarmer(farmer.getResFarmer() + homeAnimals[pos].getWeight()); // поедание
         System.out.println("На ферме не осталось ресурсов и фермер скушал животное по имени " + homeAnimals[pos].getName() + " пополнив запас ресурсов на "
-                + (homeAnimals[pos].getWeight()) + " едениц");
+                + (homeAnimals[pos].getWeight()) + " едениц.");
         homeAnimals[pos] = null;
     }
 
-    public WildAnimal visitorChooser() {
-        WildAnimal wildAnimal = null;
+    public boolean ticketCheck() {
         boolean ticketCheck = false;
-        int wildID;
         for (int i = 0; i < wildAnimals.length; i++) {
             if (wildAnimals[i].getFarmTicket() > 0) {
                 ticketCheck = true;
             }
         }
-            if (ticketCheck) {
+        return ticketCheck;
+    }
+
+    public WildAnimal visitorChooser () {
+        WildAnimal wildAnimal = null;
+        int wildID;
+        if (ticketCheck()) {
+            wildID = (int) (Math.random() * wildAnimals.length);
+            while (wildAnimals[wildID].getFarmTicket() == 0) {
                 wildID = (int) (Math.random() * wildAnimals.length);
-                while (wildAnimals[wildID].getFarmTicket() == 0) {
-                    wildID = (int) (Math.random() * homeAnimals.length);
-                }
-                wildAnimal = wildAnimals[wildID];
             }
-            return wildAnimal;
+            wildAnimal = wildAnimals[wildID];
         }
+        return wildAnimal;
+    }
 
-    public void visitFarm() { //TODO В этот метод нужно дописать вызов метода фермера "прогнать животное"
 
+    public boolean anybodyOnFarm(){
+        boolean anybodyThere = false;
+        for (int i = 0; i < homeAnimals.length; i++) {
+            if (homeAnimals[i] != null) {
+                anybodyThere = true;
+                break;
+            }
+        }
+        return anybodyThere;
+    }
+
+    public void visitFarm() {
         WildAnimal visitor = visitorChooser();
         if (visitor == null) {
             System.out.println("Все дикие звери прячутся в лесу. Настоящий дикий зверь - это фермер.");
@@ -151,14 +166,7 @@ public class Farm {
             }
             else {
                 System.out.println("Фермер не смог его прогнать.");
-                boolean anybodyThere = false;
-                for (int i = 0; i < homeAnimals.length; i++) {
-                    if (homeAnimals[i] != null) {
-                        anybodyThere = true;
-                        break;
-                    }
-                }
-                if (anybodyThere) {
+                if (anybodyOnFarm()) {
                     int homeID = (int) (Math.random() * homeAnimals.length);
                     while (homeAnimals[homeID] == null) {
                         homeID = (int) (Math.random() * homeAnimals.length);
@@ -168,25 +176,44 @@ public class Farm {
                         if (visitor.getAttackScore() >= homeAnimals[homeID].getHealth()) {
                             System.out.println(visitor.getName() + " скушал домашнее животное по имени " + homeAnimals[homeID].getName() + " насмерть.");
                             homeAnimals[homeID] = null;
-                        } else {
+                        }
+                        else {
                             System.out.println(visitor.getName() + " слегка отведал домашнее животное по имени " +
                                     homeAnimals[homeID].getName() + " снизив его здоровье до " +
                                     (homeAnimals[homeID].getHealth() - visitor.getAttackScore()) + " едениц.");
                             homeAnimals[homeID].setHealth(homeAnimals[homeID].getHealth() - visitor.getAttackScore());
                         }
-                    } else {
+                    }
+                    else {
                         System.out.println(visitor.getName() + " не смог догнать домашнее животное по имени " +
                                 homeAnimals[homeID].getName() + " и вернулся в лес.");
                     }
-                } else {
+                }
+                else {
                     System.out.println(visitor.getName() + " не смог никого скушать, все уже скушано до нас.");
                 }
             }
         }
     }
 
-        public void dayPass(){
+    public void restore(){
+        for (int i = 0; i < homeAnimals.length; i++) {
+            if (homeAnimals[i] != null && homeAnimals[i].getResources() == 0) {
+                homeAnimals[i].setResources(homeAnimals[i].getMaxResources());
+                homeAnimals[i].setHealth(homeAnimals[i].getHealth() + 1);
+            }
+        }
+    }
+
+    public void dayPass(){
+        System.out.println("На ферме начался новый день.");
+        System.out.println("На начало дня у фермера " + farmer.getResFarmer() + " едениц ресурсов.");
         farmer.spendRes();
+        visitFarm();
+        farmer.feed();
         farmer.collectRes();
+        System.out.println("Еще один прекрасный день на ферме подошел к концу. У фермера осталось " +
+                farmer.getResFarmer() + " едениц ресурсов.\n");
+
     }
 }

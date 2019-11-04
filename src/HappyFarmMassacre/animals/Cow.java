@@ -16,14 +16,14 @@ public class Cow extends HomeAnimal {
     public Cow() {
         int nameId;
         nameId = (int) (Math.random() * cowNames.length);
-        this.setName(cowNames[nameId]);
-        this.setResources((int) (Math.random() * 9) + 12);
-        this.setMaxResources(getResources());
-        this.setWeight((int) (Math.random() * 11) + 20);
-        this.setSpeed((int) (Math.random() * 6) + 5);
-        this.setHealth((int) (Math.random() * 6) + 20);
-        this.setMaxHealth(getHealth());
-        this.setEatable(true);
+        setName(cowNames[nameId]);
+        setResources((int) (Math.random() * 9) + 12);
+        setMaxResources(getResources());
+        setWeight((int) (Math.random() * 11) + 20);
+        setSpeed((int) (Math.random() * 6) + 5);
+        setHealth((int) (Math.random() * 6) + 20);
+        setMaxHealth(getHealth());
+        setEatable(true);
     }
 
     @Override
