@@ -16,6 +16,7 @@ public class Main {
 
 
 
+
         /*
         System.out.println(farmer1);
         System.out.println(Arrays.toString(farm1.homeAnimals));

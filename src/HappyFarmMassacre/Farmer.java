@@ -26,6 +26,10 @@ public class Farmer {
         }
     }
 
+    public boolean kickOut(){
+        return Math.random() < 0.5;
+    }
+
 
 
 
