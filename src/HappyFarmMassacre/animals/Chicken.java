@@ -19,8 +19,8 @@ public class Chicken extends HomeAnimal {
         this.setResources((int) (Math.random() * 8) + 8);
         this.setWeight((int) (Math.random() * 4) + 2);
         this.setSpeed((int) (Math.random() * 5) + 8);
-        this.setMaxHealth(10);
-        this.setHealth((int) (Math.random() * 6) + 5);
+        this.setMaxHealth(18);
+        this.setHealth((int) (Math.random() * 7) + 12);
         this.setEatable(true);
     }
 

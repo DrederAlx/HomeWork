@@ -18,9 +18,9 @@ public class Rabbit extends HomeAnimal {
         this.setName(rabbitNames[nameId]);
         this.setResources(0);
         this.setWeight((int) (Math.random() * 4) + 2);
-        this.setSpeed((int) (Math.random() * 8) + 15);
-        this.setMaxHealth(10);
-        this.setHealth((int) (Math.random() * 6) + 5);
+        this.setSpeed((int) (Math.random() * 6) + 15);
+        this.setMaxHealth(15);
+        this.setHealth((int) (Math.random() * 8) + 8);
         this.setEatable(true);
     }
 

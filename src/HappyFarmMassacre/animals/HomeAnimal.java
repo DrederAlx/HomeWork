@@ -1,19 +1,18 @@
 package HappyFarmMassacre.animals;
 
 public class HomeAnimal extends Animal {
-    protected String name;
     protected int health;
     protected int resources;
     protected boolean eatable;
     protected int maxHealth;
 
-    protected static String[] rabbitNames = {"Пончик", "Суслик", "Уголек", "Иннокентий", "Прыг"};
-    protected static String[] cowNames = {"Мадонна", "Ксения", "Березка", "Россия", "Жизель"};
-    protected static String[] catNames = {"Барсик", "Сырок", "Пупок", "Язь", "Пельмешек"};
-    protected static String[] chickenNames = {"Свистушка", "Несушка", "Ряба", "Айгуль", "Пеструшка"};
+    protected final static String[] rabbitNames = {"Пончик", "Суслик", "Уголек", "Иннокентий", "Прыг"};
+    protected final static String[] cowNames = {"Мадонна", "Ксения", "Березка", "Россия", "Жизель"};
+    protected final static String[] catNames = {"Барсик", "Сырок", "Пупок", "Язь", "Пельмешек"};
+    protected final static String[] chickenNames = {"Свистушка", "Несушка", "Ряба", "Айгуль", "Пеструшка"};
 
     public HomeAnimal(int weight, int speed, String name, int health, int resources, boolean eatable, int maxHealth) {
-        super(weight, speed);
+        super(weight, speed, name);
         setName(name);
         setHealth(health);
         setResources(resources);
@@ -21,14 +20,6 @@ public class HomeAnimal extends Animal {
         setMaxHealth(maxHealth);
     }
     public HomeAnimal() {
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public void setResources(int resources) {
@@ -55,4 +46,11 @@ public class HomeAnimal extends Animal {
         this.maxHealth = maxHealth;
     }
 
+    public int getHealth() {
+        return health;
+    }
+
+    public int getMaxHealth() {
+        return maxHealth;
+    }
 }
