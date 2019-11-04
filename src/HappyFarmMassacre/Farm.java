@@ -118,29 +118,39 @@ public class Farm {
                 + (homeAnimals[pos].getWeight()) + " едениц");
         homeAnimals[pos] = null;
     }
-    public void visitFarm(){
+    public void visitFarm() { //TODO В этот метод нужно дописать вызов метода фермера "прогнать животное"
         int wildID = (int) (Math.random() * wildAnimals.length);
         System.out.println("На ферму пришел " + wildAnimals[wildID].getName() + ".");
-        int homeID = (int) (Math.random() * homeAnimals.length);
-        while (homeAnimals[homeID] == null){
-            homeID = (int) (Math.random() * homeAnimals.length);
-        }
-        System.out.println(wildAnimals[wildID].getName() + " погнался за домашним животным по имени " + homeAnimals[homeID].getName() + ".");
-        if (wildAnimals[wildID].getSpeed() >= homeAnimals[homeID].getSpeed()){
-            if (wildAnimals[wildID].getAttackScore() >= homeAnimals[homeID].getHealth()){
-                System.out.println(wildAnimals[wildID].getName() + " скушал домашнее животное по имени " + homeAnimals[homeID].getName() + " насмерть.");
-                homeAnimals[homeID] = null;
+        boolean anybodyThere = false;
+        for (int i = 0; i < homeAnimals.length; i++) {
+            if (homeAnimals[i] != null) {
+                anybodyThere = true;
+                break;
             }
-            else {
-                System.out.println(wildAnimals[wildID].getName() + " слегка отведал домашнее животное по имени " +
-                        homeAnimals[homeID].getName() + " снизив его здоровье до " +
-                        (homeAnimals[homeID].getHealth() - wildAnimals[wildID].getAttackScore()) + " едениц.");
-                homeAnimals[homeID].setHealth(homeAnimals[homeID].getHealth() - wildAnimals[wildID].getAttackScore());
+        }
+        if (anybodyThere) {
+            int homeID = (int) (Math.random() * homeAnimals.length);
+            while (homeAnimals[homeID] == null) {
+                homeID = (int) (Math.random() * homeAnimals.length);
+            }
+            System.out.println(wildAnimals[wildID].getName() + " погнался за домашним животным по имени " + homeAnimals[homeID].getName() + ".");
+            if (wildAnimals[wildID].getSpeed() >= homeAnimals[homeID].getSpeed()) {
+                if (wildAnimals[wildID].getAttackScore() >= homeAnimals[homeID].getHealth()) {
+                    System.out.println(wildAnimals[wildID].getName() + " скушал домашнее животное по имени " + homeAnimals[homeID].getName() + " насмерть.");
+                    homeAnimals[homeID] = null;
+                } else {
+                    System.out.println(wildAnimals[wildID].getName() + " слегка отведал домашнее животное по имени " +
+                            homeAnimals[homeID].getName() + " снизив его здоровье до " +
+                            (homeAnimals[homeID].getHealth() - wildAnimals[wildID].getAttackScore()) + " едениц.");
+                    homeAnimals[homeID].setHealth(homeAnimals[homeID].getHealth() - wildAnimals[wildID].getAttackScore());
+                }
+            } else {
+                System.out.println(wildAnimals[wildID].getName() + " не смог догнать домашнее животное по имени " +
+                        homeAnimals[homeID].getName() + " и вернулся в лес.");
             }
         }
         else {
-            System.out.println(wildAnimals[wildID].getName() + " не смог догнать домашнее животное по имени " +
-                    homeAnimals[homeID].getName() + " и вернулся в лес.");
+            System.out.println(wildAnimals[wildID].getName() + " не смог никого скушать, все уже скушано до нас.");
         }
     }
 
