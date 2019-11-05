@@ -1,9 +1,9 @@
 package TimeHomeWork;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.Month;
+import java.time.*;
 import java.time.temporal.ChronoUnit;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
@@ -44,5 +44,13 @@ public class Main {
         lessonsLeft *= 3;
         System.out.println(lessonsLeft);
 
+        List<LocalDate> dates = currentDate.datesUntil(LocalDate.parse("2020-01-21")).collect(Collectors.toList()); // массив дат от текщей до заданной
+        int lessonsLeft1 = 0;
+        for (LocalDate date: dates) {
+            if (date.getDayOfWeek() == DayOfWeek.MONDAY || date.getDayOfWeek() == DayOfWeek.WEDNESDAY || date.getDayOfWeek() == DayOfWeek.FRIDAY){
+               lessonsLeft1 += 1;
+            }
+        }
+        System.out.println(lessonsLeft1);
     }
 }
