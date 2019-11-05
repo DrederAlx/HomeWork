@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
+
 /*
         Есть три рабочие смены:
 
@@ -38,13 +39,17 @@ public class Main {
             System.out.println("Сейчас третья смена");
         }
 
+        // Решение 1
+
         LocalDate currentDate = LocalDate.now();
-        LocalDate javaEnds = LocalDate.of(2020, Month.JANUARY, 20);
-        long lessonsLeft = ChronoUnit.WEEKS.between(currentDate, javaEnds);
-        lessonsLeft *= 3;
+        LocalDate javaEnds = LocalDate.of(2020, 1, 21);
+        long days = ChronoUnit.DAYS.between(currentDate, javaEnds);
+        int lessonsLeft = (int)((double) days / 7 * 3);
         System.out.println(lessonsLeft);
 
-        List<LocalDate> dates = currentDate.datesUntil(LocalDate.parse("2020-01-21")).collect(Collectors.toList()); // массив дат от текщей до заданной
+        // Решение 2
+
+        List <LocalDate> dates = currentDate.datesUntil(LocalDate.of(2020,1,21)).collect(Collectors.toList());
         int lessonsLeft1 = 0;
         for (LocalDate date: dates) {
             if (date.getDayOfWeek() == DayOfWeek.MONDAY || date.getDayOfWeek() == DayOfWeek.WEDNESDAY || date.getDayOfWeek() == DayOfWeek.FRIDAY){
