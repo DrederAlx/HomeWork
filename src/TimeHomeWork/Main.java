@@ -1,6 +1,9 @@
 package TimeHomeWork;
 
+import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
 
 public class Main {
     public static void main(String[] args) {
@@ -34,5 +37,12 @@ public class Main {
         else {
             System.out.println("Сейчас третья смена");
         }
+
+        LocalDate currentDate = LocalDate.now();
+        LocalDate javaEnds = LocalDate.of(2020, Month.JANUARY, 20);
+        long lessonsLeft = ChronoUnit.WEEKS.between(currentDate, javaEnds);
+        lessonsLeft *= 3;
+        System.out.println(lessonsLeft);
+
     }
 }
