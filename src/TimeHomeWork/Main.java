@@ -21,6 +21,9 @@ public class Main {
 
  */
 
+
+        // Решение 1
+
         LocalTime currentTime = LocalTime.now();
         LocalTime shiftOneBegin = LocalTime.of(7,0);
         LocalTime shiftOneEnd = LocalTime.of(15,0);
@@ -38,6 +41,19 @@ public class Main {
         else {
             System.out.println("Сейчас третья смена");
         }
+
+        // Решение 2
+
+        int hour = currentTime.getHour();
+
+        if (hour >= 7 && hour < 15) {
+            System.out.println("Сейчас первая смена");
+        } else if (hour >= 15 && hour < 23) {
+            System.out.println("Сейчас вторая смена");
+        } else {
+            System.out.println("Сейчас третья смена");
+        }
+
 
         // Решение 1
 
