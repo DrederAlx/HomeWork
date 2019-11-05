@@ -10,20 +10,10 @@ public class Bear extends WildAnimal {
         setName(name);
     }
     public Bear () {
-        this.setName("Медведь");
-        this.setWeight((int) (Math.random() * 11) + 20);
-        this.setSpeed((int) (Math.random() * 6) + 5);
-        this.setAttackScore(25);
+        setName("Медведь");
+        setWeight((int) (Math.random() * 11) + 20);
+        setSpeed((int) (Math.random() * 6) + 5);
+        setAttackScore(25);
         setFarmTicket(3);
-    }
-
-    @Override
-    public String toString() {
-        return "Bear{" +
-                "attackScore=" + attackScore +
-                ", farmTicket=" + farmTicket +
-                ", weight=" + weight +
-                ", speed=" + speed +
-                '}';
     }
 }

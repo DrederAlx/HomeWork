@@ -1,15 +1,16 @@
 package HappyFarmMassacre.animals;
 
 public class Animal {
-    protected int weight;
-    protected int speed;
-    protected String name;
+    private int weight;
+    private int speed;
+    private String name;
 
     public Animal(int weight, int speed, String name) {
         setWeight(weight);
         setSpeed(speed);
         setName(name);
     }
+
     public Animal() {
     }
 
@@ -22,11 +23,15 @@ public class Animal {
     }
 
     public void setWeight(int weight) {
-        this.weight = weight;
+        if (weight > 0) {
+            this.weight = weight;
+        }
     }
 
     public void setSpeed(int speed) {
-        this.speed = speed;
+        if (speed > 0) {
+            this.speed = speed;
+        }
     }
 
     public String getName() {
@@ -34,6 +39,8 @@ public class Animal {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name != null && !"".equals(name)) {
+            this.name = name;
+        }
     }
 }

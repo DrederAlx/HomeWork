@@ -1,8 +1,8 @@
 package HappyFarmMassacre.animals;
 
 public class WildAnimal extends Animal {
-    protected int attackScore;
-    protected int farmTicket;
+    private int attackScore;
+    private int farmTicket;
 
     public WildAnimal(int weight, int speed, int attackScore, int farmTicket, String name) {
         super(weight, speed, name);
@@ -12,7 +12,6 @@ public class WildAnimal extends Animal {
     }
 
     public WildAnimal(){
-
     }
 
     public int getFarmTicket() {
@@ -20,7 +19,9 @@ public class WildAnimal extends Animal {
     }
 
     public void setFarmTicket(int farmTicket) {
-        this.farmTicket = farmTicket;
+        if (farmTicket >= 0) {
+            this.farmTicket = farmTicket;
+        }
     }
 
     public int getAttackScore() {
@@ -28,6 +29,8 @@ public class WildAnimal extends Animal {
     }
 
     public void setAttackScore(int attackScore) {
-        this.attackScore = attackScore;
+        if (attackScore > 0) {
+            this.attackScore = attackScore;
+        }
     }
 }

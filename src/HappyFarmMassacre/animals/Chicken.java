@@ -16,25 +16,13 @@ public class Chicken extends HomeAnimal {
     public Chicken() {
         int nameId;
         nameId = (int) (Math.random() * chickenNames.length);
-        this.setName(chickenNames[nameId]);
-        this.setResources((int) (Math.random() * 8) + 8);
-        this.setMaxResources(getResources());
-        this.setWeight((int) (Math.random() * 4) + 2);
-        this.setSpeed((int) (Math.random() * 5) + 8);
-        this.setHealth((int) (Math.random() * 7) + 12);
-        this.setMaxHealth(getHealth());
-        this.setEatable(true);
-    }
-
-    @Override
-    public String toString() {
-        return "Chicken{" +
-                "name='" + name + '\'' +
-                ", health=" + health +
-                ", resources=" + resources +
-                ", eatable=" + eatable +
-                ", weight=" + weight +
-                ", speed=" + speed +
-                '}';
+        setName(chickenNames[nameId]);
+        setResources((int) (Math.random() * 8) + 8);
+        setMaxResources(getResources());
+        setWeight((int) (Math.random() * 4) + 2);
+        setSpeed((int) (Math.random() * 5) + 8);
+        setHealth((int) (Math.random() * 7) + 12);
+        setMaxHealth(getHealth());
+        setEatable(true);
     }
 }

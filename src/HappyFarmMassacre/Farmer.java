@@ -1,11 +1,10 @@
 package HappyFarmMassacre;
 
 public class Farmer {
-    protected int resFarmer;
+    private int resFarmer;
     protected Farm farm;
 
     public Farmer(int resFarmer) {
-
         setResFarmer(resFarmer);
     }
 
@@ -57,12 +56,5 @@ public class Farmer {
 
     public int getResFarmer() {
         return resFarmer;
-    }
-
-    @Override
-    public String toString() {
-        return "Farmer{" +
-                "Количество ресурсов = " + resFarmer +
-                '}';
     }
 }

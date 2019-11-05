@@ -1,12 +1,11 @@
 package HappyFarmMassacre.animals;
 
 public class HomeAnimal extends Animal {
-    protected int health;
-    protected int resources;
-    protected boolean eatable;
-    protected int maxHealth;
-    protected int maxResources;
-
+    private int health;
+    private int resources;
+    private boolean eatable;
+    private int maxHealth;
+    private int maxResources;
 
     protected final static String[] rabbitNames = {"Пончик", "Суслик", "Уголек", "Иннокентий", "Прыг"};
     protected final static String[] cowNames = {"Мадонна", "Ксения", "Березка", "Россия", "Жизель"};
@@ -63,7 +62,9 @@ public class HomeAnimal extends Animal {
     }
 
     public void setMaxHealth(int maxHealth) {
-        this.maxHealth = maxHealth;
+        if (maxHealth > 0) {
+            this.maxHealth = maxHealth;
+        }
     }
 
     public int getHealth() {
@@ -79,6 +80,8 @@ public class HomeAnimal extends Animal {
     }
 
     public void setMaxResources(int maxResources) {
-        this.maxResources = maxResources;
+        if (maxResources >= 0) {
+            this.maxResources = maxResources;
+        }
     }
 }

@@ -9,21 +9,12 @@ public class Wolf extends WildAnimal {
         setFarmTicket(farmTicket);
         setName(name);
     }
-    public Wolf () {
-        this.setName("Волк");
-        this.setWeight((int) (Math.random() * 6) + 17);
-        this.setSpeed((int) (Math.random() * 10) + 8);
-        this.setAttackScore(20);
-        setFarmTicket(3);
-    }
 
-    @Override
-    public String toString() {
-        return "Wolf{" +
-                "attackScore=" + attackScore +
-                ", farmTicket=" + farmTicket +
-                ", weight=" + weight +
-                ", speed=" + speed +
-                '}';
+    public Wolf () {
+        setName("Волк");
+        setWeight((int) (Math.random() * 6) + 17);
+        setSpeed((int) (Math.random() * 10) + 8);
+        setAttackScore(20);
+        setFarmTicket(3);
     }
 }

@@ -14,11 +14,11 @@ public class Main {
                 farm1.dayPass();
             }
             else if (farmer1.getResFarmer() != 0 && !farm1.ticketCheck()){
-                System.out.println("Все дикие звери в ужасе засели в лесу, нервно поглядывая на ферму. Фермер победил.");
+                System.out.println("Все дикие звери сидят в лесу, нервно поглядывая на ферму. Фермер победил.");
                 break;
             }
             else if (farmer1.getResFarmer() == 0){
-                System.out.println("У фермера закончились ресурсы и на ферме не осталось животных. Фермер проиграл.");
+                System.out.println("У фермера закончились ресурсы и на ферме не осталось съедобных животных. Фермер проиграл.");
                 break;
             }
         }

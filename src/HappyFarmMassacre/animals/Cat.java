@@ -15,25 +15,13 @@ public class Cat extends HomeAnimal {
     public Cat() {
         int nameId;
         nameId = (int) (Math.random() * catNames.length);
-        this.setName(catNames[nameId]);
-        this.setResources(0);
-        this.setMaxResources(0);
-        this.setWeight((int) (Math.random() * 6) + 4);
-        this.setSpeed((int) (Math.random() * 6) + 10);
-        this.setHealth((int) (Math.random() * 6) + 5);
-        this.setMaxHealth(getHealth());
-        this.setEatable(false);
-    }
-
-    @Override
-    public String toString() {
-        return "Cat{" +
-                "name='" + name + '\'' +
-                ", health=" + health +
-                ", resources=" + resources +
-                ", eatable=" + eatable +
-                ", weight=" + weight +
-                ", speed=" + speed +
-                '}';
+        setName(catNames[nameId]);
+        setResources(0);
+        setMaxResources(0);
+        setWeight((int) (Math.random() * 6) + 4);
+        setSpeed((int) (Math.random() * 6) + 10);
+        setHealth((int) (Math.random() * 6) + 5);
+        setMaxHealth(getHealth());
+        setEatable(false);
     }
 }

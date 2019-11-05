@@ -25,16 +25,4 @@ public class Cow extends HomeAnimal {
         setMaxHealth(getHealth());
         setEatable(true);
     }
-
-    @Override
-    public String toString() {
-        return "Cow{" +
-                "name='" + name + '\'' +
-                ", health=" + health +
-                ", resources=" + resources +
-                ", eatable=" + eatable +
-                ", weight=" + weight +
-                ", speed=" + speed +
-                '}';
-    }
 }

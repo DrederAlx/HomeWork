@@ -16,26 +16,14 @@ public class Rabbit extends HomeAnimal {
     public Rabbit() {
         int nameId;
         nameId = (int) (Math.random() * rabbitNames.length);
-        this.setName(rabbitNames[nameId]);
-        this.setResources(0);
-        this.setMaxResources(getResources());
-        this.setWeight((int) (Math.random() * 4) + 2);
-        this.setSpeed((int) (Math.random() * 6) + 15);
-        this.setHealth((int) (Math.random() * 8) + 8);
-        this.setMaxHealth(getHealth());
-        this.setEatable(true);
-    }
-
-    @Override
-    public String toString() {
-        return "Rabbit{" +
-                "name='" + name + '\'' +
-                ", health=" + health +
-                ", resources=" + resources +
-                ", eatable=" + eatable +
-                ", weight=" + weight +
-                ", speed=" + speed +
-                '}';
+        setName(rabbitNames[nameId]);
+        setResources(0);
+        setMaxResources(getResources());
+        setWeight((int) (Math.random() * 4) + 2);
+        setSpeed((int) (Math.random() * 6) + 15);
+        setHealth((int) (Math.random() * 8) + 8);
+        setMaxHealth(getHealth());
+        setEatable(true);
     }
 }
 

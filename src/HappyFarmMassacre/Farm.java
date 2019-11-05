@@ -2,19 +2,10 @@ package HappyFarmMassacre;
 
 import HappyFarmMassacre.animals.*;
 
-import java.util.Arrays;
-
 public class Farm {
-    protected HomeAnimal[] homeAnimals = new HomeAnimal[10];
-    protected WildAnimal[] wildAnimals = new WildAnimal[3];
+    private HomeAnimal[] homeAnimals = new HomeAnimal[10];
+    private WildAnimal[] wildAnimals = new WildAnimal[3];
     protected Farmer farmer;
-
-    @Override
-    public String toString() {
-        return "homeAnimals=" + Arrays.toString(homeAnimals) + "\n" +
-                "wildAnimals=" + Arrays.toString(wildAnimals) +
-                '}';
-    }
 
     public void addHomeAnimals() {
         int animalId;
@@ -141,7 +132,6 @@ public class Farm {
         return wildAnimal;
     }
 
-
     public boolean anybodyOnFarm(){
         boolean anybodyThere = false;
         for (int i = 0; i < homeAnimals.length; i++) {
@@ -198,7 +188,7 @@ public class Farm {
 
     public void restore(){
         for (int i = 0; i < homeAnimals.length; i++) {
-            if (homeAnimals[i] != null && homeAnimals[i].getResources() == 0) {
+            if (homeAnimals[i] != null) {
                 homeAnimals[i].setResources(homeAnimals[i].getMaxResources());
                 homeAnimals[i].setHealth(homeAnimals[i].getHealth() + 1);
             }
@@ -214,6 +204,5 @@ public class Farm {
         farmer.collectRes();
         System.out.println("Еще один прекрасный день на ферме подошел к концу. У фермера осталось " +
                 farmer.getResFarmer() + " едениц ресурсов.\n");
-
     }
 }
