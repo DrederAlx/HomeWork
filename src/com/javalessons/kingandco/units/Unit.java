@@ -6,8 +6,8 @@ abstract public class Unit implements RestAble {
     protected int speed; // если никакого свойство не указано то это package private (доступны внутри пакета)
 
     public Unit(String name, int speed) {
-        this.name = name;
-        this.speed = speed;
+        setName(name);
+        setSpeed(speed);
     }
     public boolean isAlive(){
         return health > 0;

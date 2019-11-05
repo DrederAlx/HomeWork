@@ -1,14 +1,12 @@
 package com.javalessons.kingandco;
 
-import com.javalessons.kingandco.units.BattleUnit;
-import com.javalessons.kingandco.units.Doctor;
-import com.javalessons.kingandco.units.Knight;
-import com.javalessons.kingandco.units.Warrior;
+import com.javalessons.kingandco.units.*;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
         Scanner in = new Scanner(System.in);
         System.out.println("Укажите тип персонажа");
         String userChoice;
@@ -18,11 +16,14 @@ public class Main {
             userChoice = in.nextLine();
             if ("warrior".equals(userChoice)) {
                 battleUnit = new Warrior("Воин", 3, 20, 15);
-            } else if ("knight".equals(userChoice)) {
+            }
+            else if ("knight".equals(userChoice)) {
                 battleUnit = new Knight("Рыцарь", 4, 22, 18);
-            } else if ("doctor".equals(userChoice)) {
+            }
+            else if ("doctor".equals(userChoice)) {
                 battleUnit = new Doctor("Доктор", 2, 40, 5);
-            } else {
+            }
+            else {
                 System.out.println("Вы неверно указали тип персонажа ");
             }
         }
@@ -44,5 +45,7 @@ public class Main {
         // абстракция - это интерфейсы и абстрактные классы
 
         /** ДЗ Описать проверки в классах скорость не может быть 0 и тд, реализация атаки и отдыха **/
+
+
     }
 }
