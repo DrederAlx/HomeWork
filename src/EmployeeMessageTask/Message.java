@@ -70,11 +70,6 @@ public class Message {
                 ", priority=" + priority +
                 '}';
     }
-
-    public static void main(String[] args) {
-        List<Message> messages = MessageGenerator.generate(34);
-        System.out.println(messages);
-    }
 }
 
 class MessageGenerator {
