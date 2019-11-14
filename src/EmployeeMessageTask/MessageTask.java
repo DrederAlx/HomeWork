@@ -1,94 +1,40 @@
 package EmployeeMessageTask;
 
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 public class MessageTask {
     public static void countEachPriority(List<Message> messageList) {
 
-        int countLOW = 0;
-        int countMED = 0;
-        int countHIGH = 0;
-        int countURG = 0;
+        Map<Enum, Integer> priorityMap = new HashMap<>();
 
-        for (Message message: messageList) {
-            if (message.getPriority().equals(MessagePriority.LOW)) {
-                countLOW++;
+        for (Message message : messageList) {
+            if (!priorityMap.containsKey(message.getPriority())) {
+                priorityMap.put(message.getPriority(), 1);
             }
-            else if (message.getPriority().equals(MessagePriority.MEDIUM)) {
-                countMED++;
-            }
-            else if (message.getPriority().equals(MessagePriority.HIGH)) {
-                countHIGH++;
-            }
-            else if (message.getPriority().equals(MessagePriority.URGENT)) {
-                countURG++;
+            else {
+                priorityMap.put(message.getPriority(), priorityMap.get(message.getPriority()) + 1);
             }
         }
-
-        System.out.println("Количество сообщений с приоритетом LOW: " + countLOW);
-        System.out.println("Количество сообщений с приоритетом MEDIUM: " + countMED);
-        System.out.println("Количество сообщений с приоритетом HIGH: " + countHIGH);
-        System.out.println("Количество сообщений с приоритетом URGENT: " + countURG);
-
+        for (Map.Entry<Enum, Integer> entry : priorityMap.entrySet()) {
+            System.out.println("Количество сообщений с приоритетом " + entry.getKey() + ": " + entry.getValue());
+        }
     }
 
     public static void countEachCode(List<Message> messageList) {
-        int count0 = 0;
-        int count1 = 0;
-        int count2 = 0;
-        int count3 = 0;
-        int count4 = 0;
-        int count5 = 0;
-        int count6 = 0;
-        int count7 = 0;
-        int count8 = 0;
-        int count9 = 0;
 
-        for (Message message: messageList) {
-            if (message.getCode() == 0) {
-                count0++;
+        Map<Integer, Integer> codesMap = new HashMap<>();
+        for (Message message : messageList) {
+            if (!codesMap.containsKey(message.getCode())) {
+                codesMap.put(message.getCode(), 1);
             }
-            else if (message.getCode() == 1) {
-                count1++;
-            }
-            else if (message.getCode() == 2) {
-                count2++;
-            }
-            else if (message.getCode() == 3) {
-                count3++;
-            }
-            else if (message.getCode() == 4) {
-                count4++;
-            }
-            else if (message.getCode() == 5) {
-                count5++;
-            }
-            else if (message.getCode() == 6) {
-                count6++;
-            }
-            else if (message.getCode() == 7) {
-                count7++;
-            }
-            else if (message.getCode() == 8) {
-                count8++;
-            }
-            else if (message.getCode() == 9) {
-                count9++;
+            else {
+                codesMap.put(message.getCode(), codesMap.get(message.getCode()) + 1);
             }
         }
 
-        System.out.println("Количество сообщений с кодом 0: " + count0);
-        System.out.println("Количество сообщений с кодом 1: " + count1);
-        System.out.println("Количество сообщений с кодом 2: " + count2);
-        System.out.println("Количество сообщений с кодом 3: " + count3);
-        System.out.println("Количество сообщений с кодом 4: " + count4);
-        System.out.println("Количество сообщений с кодом 5: " + count5);
-        System.out.println("Количество сообщений с кодом 6: " + count6);
-        System.out.println("Количество сообщений с кодом 7: " + count7);
-        System.out.println("Количество сообщений с кодом 8: " + count8);
-        System.out.println("Количество сообщений с кодом 9: " + count9);
+        for (Map.Entry<Integer, Integer> entry : codesMap.entrySet()) {
+            System.out.println("Количество сообщений с кодом " + entry.getKey() + ": " + entry.getValue());
+        }
     }
 
     private static void uniqueMessageCount(List<Message> messageList) {
