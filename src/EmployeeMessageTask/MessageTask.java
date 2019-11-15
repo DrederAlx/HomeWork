@@ -31,7 +31,6 @@ public class MessageTask {
                 codesMap.put(message.getCode(), codesMap.get(message.getCode()) + 1);
             }
         }
-
         for (Map.Entry<Integer, Integer> entry : codesMap.entrySet()) {
             System.out.println("Количество сообщений с кодом " + entry.getKey() + ": " + entry.getValue());
         }
