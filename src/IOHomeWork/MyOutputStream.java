@@ -6,18 +6,18 @@ import java.io.OutputStream;
 
 public class MyOutputStream extends FilterOutputStream {
 
-    public MyOutputStream(OutputStream out) {
+    private byte[] key;
+    private int currentPos;
+
+    public MyOutputStream(OutputStream out, String stringKey) {
         super(out);
+        this.key = stringKey.getBytes();
     }
 
     @Override
     public void write(int b) throws IOException {
-        String keyWord = "Java";
-        byte[] keyArr = keyWord.getBytes();
-        byte[] result = new byte[keyArr.length];
-        for(int i = 0; i< keyArr.length; i++) {
-            result[i] = (byte) (b ^ keyArr[i % keyArr.length]);
-        }
-        super.write(result);
+        b = b ^ key[currentPos % key.length];
+        currentPos++;
+        super.write(b);
     }
 }
