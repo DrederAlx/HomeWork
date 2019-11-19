@@ -31,7 +31,7 @@ public class Main {
             int data;
 
             int available = fileInputStream.available();
-            System.out.println(fileInputStream.available()/2);
+
                 while ((data = fileInputStream.read(buf)) > 0){
                     if (fileInputStream.available() > available / 2){
                         fileOutputStream1.write(buf, 0, data);
