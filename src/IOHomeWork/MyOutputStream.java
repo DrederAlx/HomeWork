@@ -12,6 +12,12 @@ public class MyOutputStream extends FilterOutputStream {
 
     @Override
     public void write(int b) throws IOException {
-        super.write(b);
+        String keyWord = "Java";
+        byte[] keyArr = keyWord.getBytes();
+        byte[] result = new byte[keyArr.length];
+        for(int i = 0; i< keyArr.length; i++) {
+            result[i] = (byte) (b ^ keyArr[i % keyArr.length]);
+        }
+        super.write(result);
     }
 }
