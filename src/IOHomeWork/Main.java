@@ -64,8 +64,7 @@ public class Main {
     public static void cryptoWrite(File file, String key) throws IOException {
         File encryptedFile = new File("resources/encrypted.txt");
         try (InputStream input = new FileInputStream(file);
-             OutputStream output = new FileOutputStream(encryptedFile);
-             MyOutputStream cryptoOut = new MyOutputStream(output, key)) {
+             MyOutputStream cryptoOut = new MyOutputStream(new FileOutputStream(encryptedFile), key)) {
 
             byte[] buf = new byte[10];
             int data;
@@ -78,15 +77,14 @@ public class Main {
 
     public static void cryptoRead(File file, String key) throws IOException {
         File decryptedFile = new File("resources/decrypted.txt");
-        try (InputStream input = new FileInputStream(file);
-             InputStream decryptIn = new MyInputStream(input, key);
-             OutputStream output = new FileOutputStream(decryptedFile)) {
+        try (InputStream decryptIn = new MyInputStream(new FileInputStream(file), key);
+             MyOutputStream cryptoOut = new MyOutputStream(new FileOutputStream(decryptedFile), key)) {
 
             byte[] buf = new byte[10];
             int data;
 
             while ((data = decryptIn.read(buf)) > 0) {
-                output.write(buf, 0, data);
+                cryptoOut.write(buf, 0, data);
             }
         }
     }
