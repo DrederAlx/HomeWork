@@ -78,7 +78,7 @@ public class Main {
     public static void cryptoRead(File file, String key) throws IOException {
         File decryptedFile = new File("resources/decrypted.txt");
         try (InputStream decryptIn = new MyInputStream(new FileInputStream(file), key);
-             MyOutputStream cryptoOut = new MyOutputStream(new FileOutputStream(decryptedFile), key)) {
+             OutputStream cryptoOut = new FileOutputStream(decryptedFile)) {
 
             byte[] buf = new byte[10];
             int data;
