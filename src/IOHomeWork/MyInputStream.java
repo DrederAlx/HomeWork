@@ -16,9 +16,11 @@ public class MyInputStream extends FilterInputStream {
 
     @Override
     public int read(byte[] b) throws IOException {
-        int buffer = super.read();
-        buffer = buffer ^ key[currentPos % key.length];
-        currentPos++;
-        return buffer;
+        byte[] d = new byte[10];
+        for (int i = 0; i < b.length; i++) {
+            d[i] = (byte) (b[i] ^ key[currentPos % key.length]);
+            currentPos++;
+        }
+        return super.read(d);
     }
 }
