@@ -15,12 +15,21 @@ public class MyInputStream extends FilterInputStream {
     }
 
     @Override
+    public int read() throws IOException {
+        int inByte = super.read();
+
+        inByte = inByte ^ key[currentPos++ % key.length];
+
+        return inByte;
+    }
+
+    @Override
     public int read(byte[] b) throws IOException {
-        byte[] d = new byte[10];
-        for (int i = 0; i < b.length; i++) {
-            d[i] = (byte) (b[i] ^ key[currentPos % key.length]);
-            currentPos++;
+        int i;
+        for (i = 0; i < b.length ; i++) {
+            int inByte = read();
+            b[i] = (byte) inByte;
         }
-        return super.read(d);
+        return i;
     }
 }
