@@ -22,4 +22,18 @@ public class MyInputStream extends FilterInputStream {
 
         return inByte;
     }
+
+
+    @Override
+    public int read(byte[] b) throws IOException {
+        int i;
+        for (i = 0; i < b.length ; i++) {
+            b[i] = (byte) read();
+            if (b[i] < 0) {
+                i = -1;
+                return i;
+        }
+        }
+        return i;
+    }
 }
