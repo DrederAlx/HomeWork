@@ -80,11 +80,10 @@ public class Main {
         try (InputStream decryptIn = new MyInputStream(new FileInputStream(file), key);
              OutputStream cryptoOut = new FileOutputStream(decryptedFile)) {
 
-            byte[] buf = new byte[10];
             int data;
 
-            while ((data = decryptIn.read(buf)) > 0) {
-                cryptoOut.write(buf, 0, data);
+            while ((data = decryptIn.read()) > 0) {
+                cryptoOut.write(data);
             }
         }
     }
