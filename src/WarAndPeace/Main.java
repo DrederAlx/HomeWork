@@ -19,6 +19,10 @@ public class Main {
             System.out.println(entry.getKey() + " " + entry.getValue());
         }
 
+        for (Map.Entry<Integer, HashSet<String>> entry : wordsToGroupNoArt(strings).entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+
         topTen(strings);
         countLetters(strings);
     }
@@ -57,7 +61,28 @@ public class Main {
                 map.get(string.length()).add(string);
             }
         }
+        return map;
+    }
 
+    public static Map<Integer, HashSet<String>> wordsToGroupNoArt(List<String> strings) {
+        Map<Integer, HashSet<String>> map = new HashMap<>();
+        boolean isArticle;
+
+        for (String string: strings) {
+            isArticle = false;
+            for (int i = 0; i < Articles.articles.length; i++) {
+                if (Articles.articles[i].equals(string.toLowerCase())) isArticle = true;
+            }
+            if (!isArticle) {
+                if (!map.containsKey(string.length())) {
+                    HashSet<String> hashSet = new HashSet<>();
+                    hashSet.add(string);
+                    map.put(string.length(), hashSet);
+                } else {
+                    map.get(string.length()).add(string);
+                }
+            }
+        }
         return map;
     }
 
@@ -72,12 +97,13 @@ public class Main {
         for (String string : strings) {
             String[] strings1 = string
                     .replaceAll("'", "")
+                    .replaceAll("[0-9]", "")
                     .replaceAll("\\p{Punct}", " ")
                     .trim()
                     .split(" ");
 
             for (String s: strings1){
-                if (s.length() > 0) {
+                if (s.toLowerCase().equals("i") || s.toLowerCase().equals("a") || s.length() > 1) {
                     newStrings.add(s);
                 }
             }
