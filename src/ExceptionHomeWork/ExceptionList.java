@@ -83,14 +83,25 @@ public class ExceptionList {
             exceptionList.add(e);
         }
 
+        try {
 
-        System.out.println(exceptionList.size());
+        } catch (RuntimeException e) {
+            exceptionList.add(e);
+        }
+
+        try {
+            int [] arr = new int [10];
+            for (int i = 0; i < 15; i++) {
+                arr[i] = i;
+            }
+        } catch (RuntimeException e) {
+            exceptionList.add(e);
+        }
+
+        System.out.println("В массиве " + exceptionList.size() + " элементов.");
         for (RuntimeException exception : exceptionList) {
             System.out.println(exception);
         }
-
-
-
 
     }
 }
