@@ -26,14 +26,10 @@ public class MyInputStream extends FilterInputStream {
 
     @Override
     public int read(byte[] b) throws IOException {
-        int i;
-        for (i = 0; i < b.length ; i++) {
-            b[i] = (byte) read();
-            if (b[i] < 0) {
-                i = -1;
-                return i;
+        int data = in.read(b);
+        for (int i = 0; i < b.length ; i++) {
+            b[i] = (byte) (b[i] ^ key[currentPos++ % key.length]);
         }
-        }
-        return i;
+        return data;
     }
 }
