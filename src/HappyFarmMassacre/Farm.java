@@ -104,8 +104,9 @@ public class Farm {
             }
         }
         farmer.setResFarmer(farmer.getResFarmer() + homeAnimals[pos].getWeight()); // поедание
-        System.out.println("На ферме не осталось ресурсов и фермер скушал животное по имени " + homeAnimals[pos].getName() + " пополнив запас ресурсов на "
-                + (homeAnimals[pos].getWeight()) + " едениц.");
+        System.out.println("На ферме не осталось ресурсов и фермер скушал животное по имени " +
+                homeAnimals[pos].getName() + " пополнив запас ресурсов на " + (homeAnimals[pos].getWeight()) +
+                " едениц.");
         homeAnimals[pos] = null;
     }
 
@@ -161,10 +162,12 @@ public class Farm {
                     while (homeAnimals[homeID] == null) {
                         homeID = (int) (Math.random() * homeAnimals.length);
                     }
-                    System.out.println(visitor.getName() + " погнался за домашним животным по имени " + homeAnimals[homeID].getName() + ".");
+                    System.out.println(visitor.getName() + " погнался за домашним животным по имени " +
+                            homeAnimals[homeID].getName() + ".");
                     if (visitor.getSpeed() >= homeAnimals[homeID].getSpeed()) {
                         if (visitor.getAttackScore() >= homeAnimals[homeID].getHealth()) {
-                            System.out.println(visitor.getName() + " скушал домашнее животное по имени " + homeAnimals[homeID].getName() + " насмерть.");
+                            System.out.println(visitor.getName() + " скушал домашнее животное по имени " +
+                                    homeAnimals[homeID].getName() + " насмерть.");
                             homeAnimals[homeID] = null;
                         }
                         else {

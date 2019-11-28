@@ -5,7 +5,7 @@ import java.nio.file.AccessDeniedException;
 import java.util.jar.JarException;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         ExceptionList.generate();
 
         try {
@@ -23,8 +23,5 @@ public class Main {
         } catch (JarException e) {
             e.printStackTrace();
         }
-
-
-
     }
 }

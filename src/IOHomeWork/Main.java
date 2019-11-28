@@ -5,10 +5,6 @@ import java.io.*;
 public class Main {
     public static void main(String[] args) {
 
-        //TODO Написать свои реализации InputStream и OutputStream, которые будут расширять FilterInputStream и
-        // FilterOutputStream, в переопределяемых методах (write и read) необходимо шифровать и дешифровать данные
-        // (использовать xor)
-
         File file = new File("resources/source.txt");
         File part1 = new File("resources/part1.txt");
         File part2 = new File("resources/part2.txt");
