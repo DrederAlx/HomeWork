@@ -14,5 +14,46 @@ package ExceptionHomeWork;
 Метод исключений getMessage() необходимо переопределить (реализация на Ваше усмотрение).
 */
 
+import java.util.regex.Pattern;
+
 public class Calculator {
+    void parseIn(String input) {
+        // Pattern pattern = Pattern.compile("");
+        StringBuilder builder = new StringBuilder();
+        int n = 0;
+        int m = 0;
+        char opChar = ' ';
+
+        for (char c : input.toCharArray()) {
+            if (Character.isDigit(c)) builder.append(c);
+            else {
+                n = Integer.parseInt(builder.toString());
+                opChar = c;
+                builder = new StringBuilder();
+            }
+        }
+        m = Integer.parseInt(builder.toString());
+
+        calculate(n, m, opChar);
+    }
+
+
+    void calculate(int n, int m, char opChar){
+        if ('*' == opChar) {
+            System.out.println("Результат\n" + n + " " + opChar + " " + m + " = " + (n*m));
+        }
+        else if ('+' == opChar) {
+            System.out.println("Результат\n" + n + " " + opChar + " " + m + " = " + (n+m));
+        }
+        else if ('/' == opChar) {
+            if (n%m != 0) {
+                double result = (double) n/m;
+                System.out.println("Результат\n" + n + " " + opChar + " " + m + " = " + result);
+            }
+            else System.out.println("Результат\n" + n + " " + opChar + " " + m + " = " + (n/m));
+        }
+        else if ('-' == opChar) {
+            System.out.println("Результат\n" + n + " " + opChar + " " + m + " = " + (n-m));
+        }
+    }
 }

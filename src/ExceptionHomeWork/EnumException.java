@@ -35,5 +35,5 @@ public class EnumException {
 }
 
 enum  Status {
-    FILE_NOT_FOUND, ACCESS_DENIED, JAR_ERROR;
+    FILE_NOT_FOUND, ACCESS_DENIED, JAR_ERROR
 }
