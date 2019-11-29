@@ -17,11 +17,12 @@ package ExceptionHomeWork;
 import java.util.regex.Pattern;
 
 public class Calculator {
+
     void parseIn(String input) {
         // Pattern pattern = Pattern.compile("");
         StringBuilder builder = new StringBuilder();
         int n = 0;
-        int m = 0;
+        int m;
         char opChar = ' ';
 
         for (char c : input.toCharArray()) {
@@ -36,7 +37,6 @@ public class Calculator {
 
         calculate(n, m, opChar);
     }
-
 
     void calculate(int n, int m, char opChar){
         if ('*' == opChar) {
