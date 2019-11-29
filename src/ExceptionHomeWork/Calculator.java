@@ -25,7 +25,7 @@ public class Calculator {
         int m;
         char opChar = ' ';
 
-        for (char c : input.toCharArray()) {
+        for (char c : input.replaceAll(" ", "").toCharArray()) {
             if (Character.isDigit(c)) builder.append(c);
             else {
                 n = Integer.parseInt(builder.toString());
