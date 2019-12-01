@@ -23,7 +23,7 @@ import java.util.regex.Pattern;
 
 public class Calculator {
 
-    void parseIn(String input) throws InputFormatException, OperatorsException, FailArgException {
+    void parseIn(String in) throws InputFormatException, OperatorsException, FailArgException {
 
         StringBuilder builder = new StringBuilder();
         int n = 0;
@@ -31,7 +31,7 @@ public class Calculator {
         char opChar = ' ';
         boolean isFind1, isFind2, isFind3;
 
-        input.replaceAll(" ", "");
+        String input = in.replaceAll(" ", "");
 
         Pattern pattern1 = Pattern.compile("^[0-9.]+"); //n
         Matcher matcher1 = pattern1.matcher(input);
