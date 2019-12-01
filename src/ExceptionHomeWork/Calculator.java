@@ -30,13 +30,18 @@ public class Calculator {
         int m;
         char opChar = ' ';
         int operatorCount = 0;
+        boolean isFind;
 
         input.replaceAll(" ", "");
 
-        Pattern pattern = Pattern.compile("^[0-9]{1,}[+\\-*/]{1}[0-9]{1,}");
+        Pattern pattern = Pattern.compile("^[0-9]+[+\\-*/][0-9]+$");
         Matcher matcher = pattern.matcher(input);
 
-        if (input.equals("") || matcher.find()) throw new InputFormatException();
+        isFind = matcher.find();
+
+        System.out.println(isFind);
+
+        if (input.equals("") || !isFind) throw new InputFormatException();
 
         char[] inputChar = input.toCharArray();
 
