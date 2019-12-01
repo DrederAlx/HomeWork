@@ -26,6 +26,7 @@ public class WPStream {
                             .toLowerCase()
                             .trim())
                     .flatMap(line -> Arrays.stream(line.split(" ")))
+                    .filter(word -> !"".equals(word))
                     .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
                     .entrySet()
                     .parallelStream()
