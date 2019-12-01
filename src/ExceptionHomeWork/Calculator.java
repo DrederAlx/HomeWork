@@ -29,23 +29,23 @@ public class Calculator {
         int n = 0;
         int m;
         char opChar = ' ';
-        boolean isFind1, isFind2, isFind3;
+        boolean checkN, checkOperation, checkM;
 
         String input = in.replaceAll(" ", "");
 
-        Pattern pattern1 = Pattern.compile("^[0-9.]+"); //n
+        Pattern pattern1 = Pattern.compile("^[0-9.]+");
         Matcher matcher1 = pattern1.matcher(input);
-        isFind1 = matcher1.find();
-        Pattern pattern2 = Pattern.compile("^[0-9.]+[+\\-*/]"); //operator
+        checkN = matcher1.find();
+        Pattern pattern2 = Pattern.compile("^[0-9.]+[+\\-*/]");
         Matcher matcher2 = pattern2.matcher(input);
-        isFind2 = matcher2.find();
-        Pattern pattern3 = Pattern.compile("^[0-9.]+[+\\-*/][0-9.]+$"); //m
+        checkOperation = matcher2.find();
+        Pattern pattern3 = Pattern.compile("^[0-9.]+[+\\-*/][0-9.]+$");
         Matcher matcher3 = pattern3.matcher(input);
-        isFind3 = matcher3.find();
+        checkM = matcher3.find();
 
 
-        if (input.equals("") || !isFind1 || !isFind3) throw new InputFormatException();
-        if (!isFind2) throw new OperatorsException();
+        if (input.equals("") || !checkN || !checkM) throw new InputFormatException();
+        if (!checkOperation) throw new OperatorsException();
 
         char[] inputChar = input.toCharArray();
 
