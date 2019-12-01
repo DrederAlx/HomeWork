@@ -29,24 +29,25 @@ public class Calculator {
         int n = 0;
         int m;
         char opChar = ' ';
-        int operatorCount = 0;
-        boolean isFind;
+        boolean isFind1, isFind2, isFind3;
 
         input.replaceAll(" ", "");
 
-        Pattern pattern = Pattern.compile("^[0-9]+[+\\-*/][0-9]+$");
-        Matcher matcher = pattern.matcher(input);
+        Pattern pattern1 = Pattern.compile("^[0-9.]+"); //n
+        Matcher matcher1 = pattern1.matcher(input);
+        isFind1 = matcher1.find();
+        Pattern pattern2 = Pattern.compile("^[0-9.]+[+\\-*/]"); //operator
+        Matcher matcher2 = pattern2.matcher(input);
+        isFind2 = matcher2.find();
+        Pattern pattern3 = Pattern.compile("^[0-9.]+[+\\-*/][0-9.]+$"); //m
+        Matcher matcher3 = pattern3.matcher(input);
+        isFind3 = matcher3.find();
 
-        isFind = matcher.find();
 
-        System.out.println(isFind);
-
-        if (input.equals("") || !isFind) throw new InputFormatException();
+        if (input.equals("") || !isFind1 || !isFind3) throw new InputFormatException();
+        if (!isFind2) throw new OperatorsException();
 
         char[] inputChar = input.toCharArray();
-
-        if (!Character.isDigit(inputChar[0]) || !Character.isDigit(inputChar[inputChar.length-1]))
-            throw new InputFormatException();
 
         for (char c : inputChar) {
 
@@ -55,14 +56,12 @@ public class Calculator {
             if (Character.isDigit(c)) builder.append(c);
             else {
                 n = Integer.parseInt(builder.toString());
-                operatorCount++;
                 opChar = c;
                 builder = new StringBuilder();
             }
         }
         m = Integer.parseInt(builder.toString());
 
-        if (operatorCount != 1) throw new OperatorsException();
         if (opChar == '/' && m == 0) throw new FailArgException();
 
 
