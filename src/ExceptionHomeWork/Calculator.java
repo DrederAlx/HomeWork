@@ -14,26 +14,52 @@ package ExceptionHomeWork;
 Метод исключений getMessage() необходимо переопределить (реализация на Ваше усмотрение).
 */
 
+import ExceptionHomeWork.CalcExcept.FailArgException;
+import ExceptionHomeWork.CalcExcept.InputFormatException;
+import ExceptionHomeWork.CalcExcept.OperatorsException;
+
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Calculator {
 
-    void parseIn(String input) {
-        // Pattern pattern = Pattern.compile("");
+    void parseIn(String input) throws InputFormatException, OperatorsException, FailArgException {
+
         StringBuilder builder = new StringBuilder();
         int n = 0;
         int m;
         char opChar = ' ';
+        int operatorCount = 0;
 
-        for (char c : input.replaceAll(" ", "").toCharArray()) {
+        input.replaceAll(" ", "");
+
+        Pattern pattern = Pattern.compile("^[0-9]{1,}[+\\-*/]{1}[0-9]{1,}");
+        Matcher matcher = pattern.matcher(input);
+
+        if (input.equals("") || matcher.find()) throw new InputFormatException();
+
+        char[] inputChar = input.toCharArray();
+
+        if (!Character.isDigit(inputChar[0]) || !Character.isDigit(inputChar[inputChar.length-1]))
+            throw new InputFormatException();
+
+        for (char c : inputChar) {
+
+            if (c == '.') throw new FailArgException();
+
             if (Character.isDigit(c)) builder.append(c);
             else {
                 n = Integer.parseInt(builder.toString());
+                operatorCount++;
                 opChar = c;
                 builder = new StringBuilder();
             }
         }
         m = Integer.parseInt(builder.toString());
+
+        if (operatorCount != 1) throw new OperatorsException();
+        if (opChar == '/' && m == 0) throw new FailArgException();
+
 
         calculate(n, m, opChar);
     }

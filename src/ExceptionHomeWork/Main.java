@@ -1,9 +1,10 @@
 package ExceptionHomeWork;
 
-import java.io.FileNotFoundException;
-import java.nio.file.AccessDeniedException;
+import ExceptionHomeWork.CalcExcept.FailArgException;
+import ExceptionHomeWork.CalcExcept.InputFormatException;
+import ExceptionHomeWork.CalcExcept.OperatorsException;
+
 import java.util.Scanner;
-import java.util.jar.JarException;
 
 public class Main {
     public static void main(String[] args) {
@@ -35,7 +36,23 @@ public class Main {
             System.out.println("Введите выражение или exit для выхода");
             String input = in.nextLine();
             if ("exit".equals(input)) break;
-            calc.parseIn(input);
+            try {
+                calc.parseIn(input);
+            }
+
+            catch (InputFormatException e) {
+                System.out.println(e.getMessage());
+            }
+
+            catch (OperatorsException e) {
+                System.out.println(e.getMessage());
+            }
+
+            catch (FailArgException e) {
+                System.out.println(e.getMessage());
+            }
+
+
         }
     }
 }
