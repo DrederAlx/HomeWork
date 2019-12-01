@@ -4,12 +4,14 @@ import ExceptionHomeWork.CalcExcept.FailArgException;
 import ExceptionHomeWork.CalcExcept.InputFormatException;
 import ExceptionHomeWork.CalcExcept.OperatorsException;
 
+import java.io.FileNotFoundException;
+import java.nio.file.AccessDeniedException;
 import java.util.Scanner;
+import java.util.jar.JarException;
 
 public class Main {
     public static void main(String[] args) {
 
-        /*
         ExceptionList.generate();
 
         try {
@@ -27,7 +29,6 @@ public class Main {
         } catch (JarException e) {
             e.printStackTrace();
         }
-        */
 
         Scanner in = new Scanner(System.in);
         Calculator calc = new Calculator();
@@ -51,8 +52,6 @@ public class Main {
             catch (FailArgException e) {
                 System.out.println(e.getMessage());
             }
-
-
         }
     }
 }
