@@ -33,19 +33,25 @@ public class Calculator {
 
         String input = in.replaceAll(" ", "");
 
-        Pattern pattern1 = Pattern.compile("^[0-9.]+");
-        Matcher matcher1 = pattern1.matcher(input);
-        checkN = matcher1.find();
-        Pattern pattern2 = Pattern.compile("^[0-9.]+[+\\-*/]");
-        Matcher matcher2 = pattern2.matcher(input);
-        checkOperation = matcher2.find();
-        Pattern pattern3 = Pattern.compile("^[0-9.]+[+\\-*/][0-9.]+$");
-        Matcher matcher3 = pattern3.matcher(input);
-        checkM = matcher3.find();
+        if ("".equals(input)) throw new InputFormatException();
 
+        Pattern pattern = Pattern.compile("^[0-9.]+");
+        Matcher matcher = pattern.matcher(input);
+        checkN = matcher.find();
 
-        if (input.equals("") || !checkN || !checkM) throw new InputFormatException();
+        if (!checkN) throw new InputFormatException();
+
+        pattern = Pattern.compile("^[0-9.]+[+\\-*/]");
+        matcher = pattern.matcher(input);
+        checkOperation = matcher.find();
+
         if (!checkOperation) throw new OperatorsException();
+
+        pattern = Pattern.compile("^[0-9.]+[+\\-*/][0-9.]+$");
+        matcher = pattern.matcher(input);
+        checkM = matcher.find();
+
+        if (!checkM) throw new InputFormatException();
 
         char[] inputChar = input.toCharArray();
 
