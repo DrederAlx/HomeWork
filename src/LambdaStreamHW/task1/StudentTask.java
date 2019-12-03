@@ -1,6 +1,6 @@
 package LambdaStreamHW.task1;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class StudentTask {
@@ -18,7 +18,7 @@ public class StudentTask {
 
         Stream<Student> studentStream = Stream.of(student1, student2, student3, student4, student5, student6, student7);
 
-        // studentStream.
+
         }
     }
 
