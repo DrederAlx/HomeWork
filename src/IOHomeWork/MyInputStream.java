@@ -27,7 +27,7 @@ public class MyInputStream extends FilterInputStream {
     @Override
     public int read(byte[] b) throws IOException {
         int data = in.read(b);
-        for (int i = 0; i < b.length ; i++) {
+        for (int i = 0; i < data ; i++) {
             b[i] = (byte) (b[i] ^ key[currentPos++ % key.length]);
         }
         return data;
