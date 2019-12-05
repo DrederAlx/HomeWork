@@ -2,13 +2,10 @@ package LambdaStreamHW.task3;
 
 import java.time.LocalDate;
 import java.time.Month;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Map;
-import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class PupilTask {
     public static void main(String[] args) {
