@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -17,9 +18,9 @@ public class PupilTask {
         pupils.add(new Pupil(8623, "Mike", Pupil.Gender.MALE, LocalDate.of(2008, Month.JULY, 24)));
         pupils.add(new Pupil(9345, "Alice", Pupil.Gender.FEMALE, LocalDate.of(2008, Month.FEBRUARY, 27)));
         pupils.add(new Pupil(7342, "Bob", Pupil.Gender.MALE, LocalDate.of(2008, Month.MARCH, 17)));
-        pupils.add(new Pupil(2574, "Mike", Pupil.Gender.FEMALE, LocalDate.of(2007, Month.MAY, 3)));
-        pupils.add(new Pupil(8871, "Richard", Pupil.Gender.MALE, LocalDate.of(2009, Month.APRIL, 21)));
-        pupils.add(new Pupil(9436, "Kurt", Pupil.Gender.MALE, LocalDate.of(2006, Month.JUNE, 28)));
+        pupils.add(new Pupil(2574, "Mike", Pupil.Gender.MALE, LocalDate.of(2007, Month.MAY, 3)));
+        pupils.add(new Pupil(8871, "Elisa", Pupil.Gender.FEMALE, LocalDate.of(2009, Month.APRIL, 21)));
+        pupils.add(new Pupil(9436, "Olga", Pupil.Gender.FEMALE, LocalDate.of(2006, Month.JUNE, 28)));
 
         // Используя Stream API:
 
@@ -82,10 +83,31 @@ public class PupilTask {
 
         // 7. Отсортировать по полу, потом по дате рождения, потом по имени (в обратном порядке), собрать в список (List)
 
+        pupils.stream()
+                .sorted(Comparator.comparing(Pupil::getName).thenComparing(Pupil::getBirth).thenComparing(Pupil::getGender))
+                .collect(Collectors.toList())
+                .forEach(System.out::println);
+
+
         // 8. Вывести в косоль всех учеников в возрасте от N до M лет
+
+        pupils.stream()
+                .filter(pupil -> (pupil.getAge()/365) >= 10)
+                .filter(pupil -> (pupil.getAge()/365) <= 11)
+                .forEach(System.out::println);
 
         // 9. Собрать в список всех учеников с именем=someName
 
+        List <Pupil> nameList = pupils.stream()
+                .filter(pupil -> "Mike".equals(pupil.getName()))
+                .collect(Collectors.toList());
+
+        System.out.println("\n" + nameList);
         // 10. Собрать Map<Pupil.Gender, Integer>, где Pupil.Gender - пол, Integer - суммарный возраст учеников данного пола
+
+        Map<Pupil.Gender, Integer> genderAgeMap = pupils.stream()
+                .collect(Collectors.toMap(Pupil::getGender, pupil -> pupil.getAge()/365, (item1, item2) -> item1));
+
+        System.out.println(genderAgeMap);
     }
 }
