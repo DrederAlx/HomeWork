@@ -52,9 +52,15 @@ public class Pupil {
         return (int) ChronoUnit.DAYS.between(getBirth(), LocalDate.now());
     }
 
+    public int getBirthYear() {
+        return birth.getYear();
+    }
+
     public void setBirth(LocalDate birth) {
         this.birth = birth;
     }
+
+
 
 
 
