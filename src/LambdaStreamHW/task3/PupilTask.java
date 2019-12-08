@@ -42,8 +42,7 @@ public class PupilTask {
         // 2. Найти средний возраст учеников
 
         int averageAge = (int) pupils.stream()
-                .mapToInt(Pupil::getAge)
-                .map(age -> age / 365)
+                .mapToInt(Pupil::getAgeInYear)
                 .average()
                 .getAsDouble();
 
@@ -53,7 +52,7 @@ public class PupilTask {
         // 3. Найти самого младшего ученика
 
         Pupil minPupil = pupils.stream()
-                .min(Comparator.comparing(Pupil::getAge))
+                .min(Comparator.comparing(Pupil::getAgeInDays))
                 .orElse(new Pupil(1111, "Default", Pupil.Gender.MALE, LocalDate.of(2008, Month.JANUARY, 1)));
 
         System.out.println(minPupil);
@@ -61,7 +60,7 @@ public class PupilTask {
         // 4. Найти самого старшего ученика
 
         Pupil maxPupil = pupils.stream()
-                .max(Comparator.comparing(Pupil::getAge))
+                .max(Comparator.comparing(Pupil::getAgeInDays))
                 .orElse(new Pupil(1111, "Default", Pupil.Gender.MALE, LocalDate.of(2008, Month.JANUARY, 1)));
 
         System.out.println(maxPupil);
@@ -92,8 +91,8 @@ public class PupilTask {
         // 8. Вывести в косоль всех учеников в возрасте от N до M лет
 
         pupils.stream()
-                .filter(pupil -> (pupil.getAge()/365) >= 10)
-                .filter(pupil -> (pupil.getAge()/365) <= 11)
+                .filter(pupil -> (pupil.getAgeInYear()) >= 10)
+                .filter(pupil -> (pupil.getAgeInYear()) <= 11)
                 .forEach(System.out::println);
 
         // 9. Собрать в список всех учеников с именем=someName
@@ -103,10 +102,11 @@ public class PupilTask {
                 .collect(Collectors.toList());
 
         System.out.println("\n" + nameList);
+
         // 10. Собрать Map<Pupil.Gender, Integer>, где Pupil.Gender - пол, Integer - суммарный возраст учеников данного пола
 
         Map<Pupil.Gender, Integer> genderAgeMap = pupils.stream()
-                .collect(Collectors.toMap(Pupil::getGender, pupil -> pupil.getAge()/365, (item1, item2) -> item1));
+                .collect(Collectors.groupingBy(Pupil::getGender, Collectors.summingInt(Pupil::getAgeInYear)));
 
         System.out.println(genderAgeMap);
     }

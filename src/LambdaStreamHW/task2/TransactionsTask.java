@@ -1,6 +1,7 @@
 package LambdaStreamHW.task2;
 
 import java.util.Map;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TransactionsTask {
@@ -23,7 +24,11 @@ public class TransactionsTask {
                 transaction4, transaction5, transaction6, transaction7);
 
         // результат: мапа, где String - номер (number) аккаунта, Long - сумма транзакций (sum) по аккаунту
-        Map<String, Long> sumOfTransactionByEachAccount;
-        // TODO: найти сумму транзакций по каждому аккаунту
+
+        Map<String, Long> sumOfTransactionByEachAccount = transactionStream
+                .collect(Collectors.groupingBy(transaction -> transaction.getAccount().getNumber(),
+                        Collectors.summingLong(Transaction::getSum)));
+
+        System.out.println(sumOfTransactionByEachAccount);
     }
 }

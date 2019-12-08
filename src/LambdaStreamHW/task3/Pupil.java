@@ -47,7 +47,7 @@ public class Pupil {
         return birth;
     }
 
-    public int getAge() {
+    public int getAgeInDays() {
         return (int) ChronoUnit.DAYS.between(getBirth(), LocalDate.now());
     }
 
@@ -57,6 +57,10 @@ public class Pupil {
 
     public void setBirth(LocalDate birth) {
         this.birth = birth;
+    }
+
+    public int getAgeInYear() {
+        return (int) ChronoUnit.DAYS.between(getBirth(), LocalDate.now())/365;
     }
 
 
