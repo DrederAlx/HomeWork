@@ -76,7 +76,4 @@ public class Pupil {
                 ", birth=" + birth +
                 '}';
     }
-
-    // TODO: добавить все необходимые методы
-
 }
