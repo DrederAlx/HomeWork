@@ -1,5 +1,6 @@
 package LambdaStreamHW.task1;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -18,6 +19,9 @@ public class StudentTask {
 
         Stream<Student> studentStream = Stream.of(student1, student2, student3, student4, student5, student6, student7);
 
+        studentStream
+                .map(student -> Collectors.toMap(Student::getSubjects, Student::getLogin))
+                .flatMap()
 
         }
     }
