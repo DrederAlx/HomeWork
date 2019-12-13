@@ -19,7 +19,25 @@ public class ThreadWP {
     public static void main(String[] args) {
         File file1 = new File("resources/wp.txt");
         List<String> strings = parseFile(file1);
-        topTen(strings);
+
+        ArrayList<Thread> threads = new ArrayList<>();
+
+        for (int i = 0; i < Runtime.getRuntime().availableProcessors(); i++) {
+            threads.add(new Thread(new CollectTopThread()));
+        }
+        for (Thread thread : threads){
+            thread.start();
+            System.out.println(thread.getName());
+        }
+        for (Thread thread : threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        Map<String, Integer> map = new HashMap<>();
 
     }
 
@@ -64,6 +82,22 @@ public class ThreadWP {
         for (int i = list.size() - 1; i > list.size() - 11; i--) {
             System.out.println("Слово \"" + list.get(i).getKey() + "\" встречается " + list.get(i).getValue() + " раз.");
         }
+    }
+}
+
+class CollectTopThread implements Runnable{
+    @Override
+    public void run() {
+        /*
+        Map<String, Integer> map = new HashMap<>();
+        for (String string : strings) {
+            if (!map.containsKey(string)) {
+                map.put(string, 1);
+            } else {
+                map.put(string, map.get(string) + 1);
+            }
+        }
+        */
     }
 }
 
