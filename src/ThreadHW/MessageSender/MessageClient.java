@@ -22,8 +22,9 @@ public class MessageClient {
         String name = scanner.nextLine();
         String messageText;
         while (true){
-            System.out.println("Введите сообщение");
+            System.out.println("Введите сообщение или exit для выхода");
             messageText = scanner.nextLine();
+            if ("exit".equals(messageText)) break;
             try {
                 sendAndGetMessage(name, messageText);
             } catch (Exception e) {
@@ -34,7 +35,7 @@ public class MessageClient {
 
     private void sendAndGetMessage(String name, String messageText) throws Exception {
         try (Connection connection = new Connection(new Socket(server, port))){
-            Message message = new Message(name, messageText);
+            Message message = new Message(name, messageText, connection.getClientId());
             connection.sendMessage(message);
 
             message = connection.readMessage();
@@ -47,7 +48,9 @@ public class MessageClient {
         try (InputStream inputStream = MessageClient.class.getClassLoader().getResourceAsStream("config.properties")){
 
             Properties properties = new Properties();
-            properties.load(inputStream);
+            if (inputStream != null) {
+                properties.load(inputStream);
+            }
 
             String server = properties.getProperty("server");//"127.0.0.1";
             int port = Integer.parseInt(properties.getProperty("port")); //8090;

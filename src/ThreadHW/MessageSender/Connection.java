@@ -9,6 +9,7 @@ public class Connection implements AutoCloseable {
     private Socket socket;
     private ObjectOutputStream out;
     private ObjectInputStream in;
+    private int clientId = (int)(Math.random()*10000)+1;
 
     public Connection(Socket socket) throws IOException {
         this.socket = socket;
@@ -23,6 +24,10 @@ public class Connection implements AutoCloseable {
 
     public Message readMessage() throws IOException, ClassNotFoundException {
         return (Message) in.readObject();
+    }
+
+    public int getClientId() {
+        return clientId;
     }
 
     @Override

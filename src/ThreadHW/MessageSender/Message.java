@@ -6,11 +6,13 @@ import java.time.LocalDateTime;
 public class Message implements Serializable {
     private String sender;
     private String text;
+    private int clientId;
     private LocalDateTime dateTime;
 
-    public Message(String sender, String messageText) {
+    public Message(String sender, String messageText, int clientId) {
         this.sender = sender;
         this.text = messageText;
+        this.clientId = clientId;
         dateTime = LocalDateTime.now();
     }
 
@@ -28,6 +30,10 @@ public class Message implements Serializable {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public int getClientId() {
+        return clientId;
     }
 
     @Override
