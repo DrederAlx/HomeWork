@@ -20,7 +20,6 @@ public class OptionalRestaurantTask {
         for (int i = 0; i < 2; i++) {
             new Thread(new Cook(waiterOrders, cookOrders)).start();
         }
-
     }
 }
 
@@ -40,11 +39,11 @@ class Client implements Runnable{
         while (!Thread.currentThread().isInterrupted()) {
             Order order = createOrder();
             try {
-                Thread.sleep(2000);
                 System.out.println("Поток " + Thread.currentThread().getName() + " создал заказ номер " + order.getOrderNumber());
                 clientOrders.put(order);
-                cookOrders.take();
                 System.out.println("Заказов в очереди клиента " + (clientOrders.size()));
+                Thread.sleep(2000);
+                cookOrders.take();
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 e.printStackTrace();
@@ -74,11 +73,12 @@ class Waiter implements Runnable {
         Thread.currentThread().setName("Официант " + (int)(Math.random()*100)+1);
         while (!Thread.currentThread().isInterrupted()) {
             try {
-                Thread.sleep(4000);
+
                 order = clientOrders.take();
                 System.out.println("Поток " + Thread.currentThread().getName() + " взял заказ номер " + order.getOrderNumber());
                 waiterOrders.put(order);
                 System.out.println("Заказов в очереди официанта " + (waiterOrders.size()));
+                Thread.sleep(4000);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 e.printStackTrace();
@@ -103,11 +103,11 @@ class Cook implements Runnable {
         Thread.currentThread().setName("Повар " + (int)(Math.random()*100)+1);
         while (!Thread.currentThread().isInterrupted()) {
             try {
-                Thread.sleep(6000);
                 order = waiterOrders.take();
                 System.out.println("Поток " + Thread.currentThread().getName() + " взял заказ номер " + order.getOrderNumber());
                 cookOrders.put(order);
                 System.out.println("Заказов в очереди повара " + (cookOrders.size()));
+                Thread.sleep(6000);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 e.printStackTrace();

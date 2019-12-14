@@ -1,7 +1,6 @@
 package ThreadHW;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.util.*;
 
 public class ThreadWP {
@@ -17,26 +16,15 @@ public class ThreadWP {
 
     public static void main(String[] args) {
 
-        ArrayList<Thread> threads = new ArrayList<>();
-
-        for (int i = 0; i < Runtime.getRuntime().availableProcessors(); i++) {
-            threads.add(new Thread(new CollectTopThread()));
-        }
-        for (Thread thread : threads) {
-            thread.start();
-            System.out.println(thread.getName());
-        }
-        for (Thread thread : threads) {
-            try {
-                thread.join();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        MultiRead multiRead = new MultiRead();
+        multiRead.readFile(new File("resources/wp.txt"));
+        for (Map.Entry<String, Integer> entry : multiRead.getTopHundred().entrySet()) {
+            System.out.println("Слово \"" + entry.getKey() + "\" встречается " + entry.getValue() + " раз.");
         }
     }
 }
 
-class ReadThread implements Runnable{
+class ReadThread extends Thread{
 
     private File file;
     private long startPos;
@@ -82,18 +70,57 @@ class ReadThread implements Runnable{
     }
 }
 
-class CollectTopThread implements Runnable{
+class MultiRead {
 
-    @Override
-    public void run() {
+    private Map<String, Integer> resultMap;
+    private LinkedHashMap<String, Integer> topHundred;
+
+    public HashMap<String, Integer> getTopHundred() {
+        return topHundred;
+    }
+
+    private void wordsFromMaps(Map<String, Integer> map) {
+        if (resultMap == null) {
+            resultMap = map;
+        }
+        else {
+           for (Map.Entry<String, Integer> entry : map.entrySet()) {
+                String key = entry.getKey();
+                if (resultMap.containsKey(key)) {
+                    resultMap.put(key, resultMap.get(key) + entry.getValue());
+                }
+                else {
+                    resultMap.put(key, entry.getValue());
+                }
+            }
         }
     }
 
-class ValueComparator implements Comparator<Map.Entry<String, Integer>> {
-
-        @Override
-        public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
-            return Integer.compare(o1.getValue(), o2.getValue());
+    public void readFile(File file){
+        int numberOfThreads = Runtime.getRuntime().availableProcessors();
+        long fileLength = file.length();
+        long partLength = fileLength%numberOfThreads == 0 ? fileLength / (long) numberOfThreads : fileLength / (long) numberOfThreads + 1;
+        ReadThread[] threads = new ReadThread[numberOfThreads];
+        for (int i = 0; i < numberOfThreads; i++) {
+            threads[i] = new ReadThread(file, i * partLength, partLength);
         }
+        for (ReadThread thread: threads) {
+            thread.start();
+        }
+        for (ReadThread thread: threads) {
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        for (ReadThread thread: threads) {
+            wordsFromMaps(thread.getWordMap());
+        }
+        topHundred = new LinkedHashMap<>();
+        resultMap.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .limit(100)
+                .forEach(e -> topHundred.put(e.getKey(), e.getValue()));
     }
-
+}
