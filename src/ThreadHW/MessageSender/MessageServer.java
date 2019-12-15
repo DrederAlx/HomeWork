@@ -25,16 +25,9 @@ public class MessageServer {
                 connection = new Connection(socket);
                 connections.put(connection.getClientId(), connection);
                 new Thread(new Reader(connection)).start();
-                // printMessage(connection.readMessage());
-                // connection.sendMessage(new Message("server", "сообщение получено", 123));
             }
         }
     }
-
-    private void printMessage(Message message){
-        System.out.println("получено сообщение: " + message);
-    }
-
 
     class Reader implements Runnable{
         private Connection connection;
