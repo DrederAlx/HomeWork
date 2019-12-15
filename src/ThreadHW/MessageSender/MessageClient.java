@@ -6,42 +6,57 @@ import java.util.Properties;
 import java.util.Scanner;
 
 public class MessageClient {
-    private String server;
-    private int port;
     private Scanner scanner;
+    private Connection connection;
 
-    public MessageClient(String server, int port) {
-        this.server = server;
-        this.port = port;
+    public MessageClient(Connection connection) {
+        this.connection = connection;
         this.scanner = new Scanner(System.in);
     }
 
     public void start(){
+        Thread readThread = new Thread(new Reader(connection));
+        readThread.setDaemon(true);
+        readThread.start();
         System.out.println("Введите имя");
-
         String name = scanner.nextLine();
         String messageText;
         while (true){
             System.out.println("Введите сообщение или exit для выхода");
             messageText = scanner.nextLine();
             if ("exit".equals(messageText)) break;
-            try {
-                sendAndGetMessage(name, messageText);
-            } catch (Exception e) {
-                e.printStackTrace();
+            if (messageText != null && !messageText.isEmpty()) {
+                Message message = new Message(name, messageText, connection.getClientId());
+                try {
+                    connection.sendMessage(message);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
 
-    private void sendAndGetMessage(String name, String messageText) throws Exception {
-        try (Connection connection = new Connection(new Socket(server, port))){
-            Message message = new Message(name, messageText, connection.getClientId());
-            connection.sendMessage(message);
+    class Reader implements Runnable {
+        private Connection connection;
 
-            // message = connection.readMessage();
-            // System.out.println("ответ от сервера: " + message);
+        public Reader(Connection connection) {
+            this.connection = connection;
         }
-    }
+
+        @Override
+        public void run() {
+            while (!Thread.currentThread().isInterrupted()) {
+                Message message = null;
+                try {
+                    message = connection.readMessage();
+                    } catch (IOException | ClassNotFoundException e) {
+                        Thread.currentThread().interrupt();
+                        e.printStackTrace();
+                    }
+                    System.out.println(message);
+                }
+            }
+        }
 
 
     public static void main(String[] args) {
@@ -55,12 +70,12 @@ public class MessageClient {
             String server = properties.getProperty("server");//"127.0.0.1";
             int port = Integer.parseInt(properties.getProperty("port")); //8090;
             System.out.println(server);
-            MessageClient messageClient = new MessageClient(server, port);
+            Connection connection = new Connection(new Socket(server, port));
+            MessageClient messageClient = new MessageClient(connection);
             messageClient.start();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
 
