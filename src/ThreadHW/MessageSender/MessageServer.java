@@ -7,7 +7,6 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class MessageServer {
     private int port;
-    private Connection connection;
     private Map<Integer, Connection> connections = Collections.synchronizedMap(new HashMap<>());
     private LinkedBlockingDeque<Message> messages = new LinkedBlockingDeque<>();
 
@@ -19,6 +18,7 @@ public class MessageServer {
         new Thread(new Writer()).start();
         try (ServerSocket serverSocket = new ServerSocket(port)){
             System.out.println("Server started...");
+            Connection connection;
             //noinspection InfiniteLoopStatement
             while (true){
                 Socket socket = serverSocket.accept();
@@ -38,7 +38,6 @@ public class MessageServer {
 
     class Reader implements Runnable{
         private Connection connection;
-        private int connectionId;
 
         public Reader(Connection connection) {
             this.connection = connection;
@@ -47,14 +46,12 @@ public class MessageServer {
         @Override
         public void run() {
             while (!Thread.currentThread().isInterrupted()) {
-                Message message = null;
                 try {
-                    message = connection.readMessage();
+                    Message message = connection.readMessage();
                     messages.put(message);
                 } catch (IOException | ClassNotFoundException | InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println(message);
             }
         }
     }

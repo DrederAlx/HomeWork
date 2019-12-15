@@ -38,8 +38,8 @@ public class MessageClient {
             Message message = new Message(name, messageText, connection.getClientId());
             connection.sendMessage(message);
 
-            message = connection.readMessage();
-            System.out.println("ответ от сервера: " + message);
+            // message = connection.readMessage();
+            // System.out.println("ответ от сервера: " + message);
         }
     }
 
