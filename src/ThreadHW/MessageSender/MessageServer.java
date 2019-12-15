@@ -16,6 +16,7 @@ public class MessageServer {
     }
 
     public void start() throws IOException {
+        new Thread(new Writer()).start();
         try (ServerSocket serverSocket = new ServerSocket(port)){
             System.out.println("Server started...");
             //noinspection InfiniteLoopStatement
@@ -23,11 +24,10 @@ public class MessageServer {
                 Socket socket = serverSocket.accept();
                 connection = new Connection(socket);
                 connections.put(connection.getClientId(), connection);
-                printMessage(connection.readMessage());
-                connection.sendMessage(new Message("server", "сообщение получено", 123));
+                new Thread(new Reader(connection)).start();
+                // printMessage(connection.readMessage());
+                // connection.sendMessage(new Message("server", "сообщение получено", 123));
             }
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
         }
     }
 
