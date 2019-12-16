@@ -15,14 +15,14 @@ public class MessageClient {
     }
 
     public void start(){
-        Thread readThread = new Thread(new Reader(connection));
-        readThread.setDaemon(true);
-        readThread.start();
         System.out.println("Введите имя");
         String name = scanner.nextLine();
         String messageText;
+        System.out.println("Введите сообщение или exit для выхода");
+        Thread readThread = new Thread(new Reader(connection));
+        readThread.setDaemon(true);
+        readThread.start();
         while (true){
-            System.out.println("Введите сообщение или exit для выхода");
             messageText = scanner.nextLine();
             if ("exit".equals(messageText)) break;
             if (messageText != null && !messageText.isEmpty()) {
@@ -53,7 +53,7 @@ public class MessageClient {
                         Thread.currentThread().interrupt();
                         e.printStackTrace();
                     }
-                    System.out.println(message);
+                    System.out.println("Сообщение от " + message.getSender() + ": " + message.getText());
                 }
             }
         }

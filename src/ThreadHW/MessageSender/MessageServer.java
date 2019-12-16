@@ -65,7 +65,6 @@ public class MessageServer {
                     for (Map.Entry<Integer, Connection> entry : connections.entrySet()){
                         if (entry.getKey() != message.getClientId() && !entry.getValue().getSocket().isClosed()) {
                             try {
-                                System.out.println(entry.getKey() + " " + message.getClientId());
                                 entry.getValue().sendMessage(message);
                             } catch (IOException e) {
                                 e.printStackTrace();

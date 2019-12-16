@@ -10,8 +10,8 @@ public class Message implements Serializable {
     private LocalDateTime dateTime;
 
     public Message(String sender, String messageText) {
-        this.sender = sender;
-        this.text = messageText;
+        setSender(sender);
+        setText(messageText);
         dateTime = LocalDateTime.now();
     }
 
@@ -20,7 +20,9 @@ public class Message implements Serializable {
     }
 
     public void setSender(String sender) {
-        this.sender = sender;
+        if (sender != null && !"".equals(sender)) {
+            this.sender = sender;
+        }
     }
 
     public String getText() {
@@ -28,7 +30,9 @@ public class Message implements Serializable {
     }
 
     public void setText(String text) {
-        this.text = text;
+        if (text != null && !"".equals(text)) {
+            this.text = text;
+        }
     }
 
     public int getClientId() {
