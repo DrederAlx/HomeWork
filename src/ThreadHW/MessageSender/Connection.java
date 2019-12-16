@@ -30,6 +30,10 @@ public class Connection implements AutoCloseable {
         return clientId;
     }
 
+    public Socket getSocket() {
+        return socket;
+    }
+
     @Override
     public void close() throws Exception {
         // закрытие ресурсов

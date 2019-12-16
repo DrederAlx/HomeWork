@@ -26,7 +26,7 @@ public class MessageClient {
             messageText = scanner.nextLine();
             if ("exit".equals(messageText)) break;
             if (messageText != null && !messageText.isEmpty()) {
-                Message message = new Message(name, messageText, connection.getClientId());
+                Message message = new Message(name, messageText);
                 try {
                     connection.sendMessage(message);
                 } catch (IOException e) {

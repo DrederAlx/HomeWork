@@ -9,10 +9,9 @@ public class Message implements Serializable {
     private int clientId;
     private LocalDateTime dateTime;
 
-    public Message(String sender, String messageText, int clientId) {
+    public Message(String sender, String messageText) {
         this.sender = sender;
         this.text = messageText;
-        this.clientId = clientId;
         dateTime = LocalDateTime.now();
     }
 
@@ -34,6 +33,10 @@ public class Message implements Serializable {
 
     public int getClientId() {
         return clientId;
+    }
+
+    public void setClientId(int clientId) {
+        this.clientId = clientId;
     }
 
     @Override

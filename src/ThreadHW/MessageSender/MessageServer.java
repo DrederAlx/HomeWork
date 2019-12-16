@@ -39,10 +39,16 @@ public class MessageServer {
         @Override
         public void run() {
             while (!Thread.currentThread().isInterrupted()) {
+                if (connection.getSocket().isClosed()) {
+                    connections.remove(connection.getClientId());
+                    Thread.currentThread().interrupt();
+                }
                 try {
                     Message message = connection.readMessage();
+                    message.setClientId(connection.getClientId());
                     messages.put(message);
                 } catch (IOException | ClassNotFoundException | InterruptedException e) {
+                    Thread.currentThread().interrupt();
                     e.printStackTrace();
                 }
             }
@@ -57,15 +63,15 @@ public class MessageServer {
                 try {
                     Message message = messages.take();
                     for (Map.Entry<Integer, Connection> entry : connections.entrySet()){
-                        if (!entry.getKey().equals(message.getClientId())) {
+                        if (entry.getKey() != message.getClientId() && !entry.getValue().getSocket().isClosed()) {
                             try {
+                                System.out.println(entry.getKey() + " " + message.getClientId());
                                 entry.getValue().sendMessage(message);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
                         }
                     }
-
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
