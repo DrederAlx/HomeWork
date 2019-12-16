@@ -49,7 +49,7 @@ public class MessageServer {
                     messages.put(message);
                 } catch (IOException | ClassNotFoundException | InterruptedException e) {
                     Thread.currentThread().interrupt();
-                    e.printStackTrace();
+                    System.out.println("Клиент " + connection.getClientId() + " отключился");
                 }
             }
         }
