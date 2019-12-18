@@ -35,6 +35,7 @@ public class MessageClient {
             }
         } catch (Exception e) {
             e.printStackTrace();
+            //TODO обработать здесь
         }
     }
 
@@ -53,7 +54,7 @@ public class MessageClient {
                     System.out.println("Сообщение от " + message.getSender() + ": " + message.getText());
                     } catch (IOException | ClassNotFoundException e) {
                         Thread.currentThread().interrupt();
-                        e.printStackTrace();
+                    System.out.println("Сервер завершил свою работу");
                     }
 
                 }

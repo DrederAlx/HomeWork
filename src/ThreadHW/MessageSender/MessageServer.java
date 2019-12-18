@@ -50,6 +50,7 @@ public class MessageServer {
                 } catch (IOException | ClassNotFoundException | InterruptedException e) {
                     Thread.currentThread().interrupt();
                     System.out.println("Клиент " + connection.getClientId() + " отключился");
+                    connections.remove(connection.getClientId());
                 }
             }
         }
