@@ -8,7 +8,7 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ConsoleCommandsThreads {
+public class OptionalExecutorTask {
     public static void main(String[] args) {
         ExecutorService threadPool = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
         Scanner scanner = new Scanner(System.in);
@@ -53,7 +53,7 @@ public class ConsoleCommandsThreads {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-            System.out.println("Список доступных команд: \n help - помощь \n time - текущее время \n " +
+            System.out.println("Список доступных команд: \nhelp - помощь \ntime - текущее время \n" +
                     "getFromFile - получение данных из файла");
         }
     }
