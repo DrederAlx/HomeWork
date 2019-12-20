@@ -63,7 +63,8 @@ public class MessageClient {
 
 
     public static void main(String[] args) {
-        try (InputStream inputStream = MessageClient.class.getClassLoader().getResourceAsStream("config.properties")){
+        try (InputStream inputStream = MessageClient.class.getClassLoader()
+                .getResourceAsStream("config.properties")){
 
             Properties properties = new Properties();
             if (inputStream != null) {
