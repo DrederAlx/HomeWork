@@ -74,6 +74,7 @@ public class MessageServer {
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    //TODO Сравнивать можно не id а сами объекты connection, помещая ссылку на объект connection в message
                 }
             }
         }

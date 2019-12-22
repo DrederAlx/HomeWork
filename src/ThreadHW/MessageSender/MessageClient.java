@@ -35,7 +35,8 @@ public class MessageClient {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            //TODO обработать здесь
+            //TODO обработать исключение здесь
+            //TODO Сделать подключение на 1 сообщение и подключение для считывания по таймеру
         }
     }
 
