@@ -26,7 +26,6 @@ public class MessageClient {
             readThread.setDaemon(true);
             readThread.start();
             while (true) {
-                System.out.print(name + ": ");
                 messageText = scanner.nextLine();
                 if ("exit".equals(messageText)) break;
                 if (messageText != null && !messageText.isEmpty()) {
@@ -53,7 +52,7 @@ public class MessageClient {
             while (!Thread.currentThread().isInterrupted()) {
                 try {
                     Message message = connection.readMessage();
-                    System.out.println(message.getSender() + ": " + message.getText());
+                    System.out.println("Сообщение от " + message.getSender() + ": " + message.getText());
                     } catch (IOException | ClassNotFoundException e) {
                         Thread.currentThread().interrupt();
                     System.out.println("Подключение разорвано");
