@@ -48,7 +48,8 @@ public class MessageServer {
                     messages.put(message);
                 } catch (IOException | ClassNotFoundException | InterruptedException e) {
                     Thread.currentThread().interrupt();
-                    System.out.println("Клиент " + connection.getSocket().getInetAddress() + " отключился");
+                    System.out.println("Клиент " + connection.getSocket().getInetAddress() + " : " +
+                            connection.getSocket().getPort() + " отключился");
                     connections.remove(connection);
                 }
             }
