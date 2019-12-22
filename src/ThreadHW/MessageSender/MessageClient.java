@@ -34,8 +34,8 @@ public class MessageClient {
                 }
             }
         } catch (Exception e) {
-            e.printStackTrace();
-            //TODO обработать исключение здесь
+            System.out.println("Отправка сообщений невозможна т.к. отсутствует подключение к серверу");
+
             //TODO Сделать подключение на 1 сообщение и подключение для считывания по таймеру
         }
     }
@@ -55,13 +55,12 @@ public class MessageClient {
                     System.out.println("Сообщение от " + message.getSender() + ": " + message.getText());
                     } catch (IOException | ClassNotFoundException e) {
                         Thread.currentThread().interrupt();
-                    System.out.println("Сервер завершил свою работу");
+                    System.out.println("Подключение разорвано");
                     }
 
                 }
             }
         }
-
 
     public static void main(String[] args) {
         try (InputStream inputStream = MessageClient.class.getClassLoader()

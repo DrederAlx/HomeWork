@@ -1,18 +1,15 @@
 package ThreadHW.MessageSender;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 public class Message implements Serializable {
     private String sender;
     private String text;
-    private int clientId;
-    private LocalDateTime dateTime;
+    private int id;
 
     public Message(String sender, String messageText) {
         setSender(sender);
         setText(messageText);
-        dateTime = LocalDateTime.now();
     }
 
     public String getSender() {
@@ -35,20 +32,11 @@ public class Message implements Serializable {
         }
     }
 
-    public int getClientId() {
-        return clientId;
+    public int getId() {
+        return id;
     }
 
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
-    }
-
-    @Override
-    public String toString() {
-        return "Message{" +
-                "sender='" + sender + '\'' +
-                ", text='" + text + '\'' +
-                ", dateTime=" + dateTime +
-                '}';
+    public void setId(int id) {
+        this.id = id;
     }
 }

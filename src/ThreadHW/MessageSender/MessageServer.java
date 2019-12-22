@@ -7,7 +7,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class MessageServer {
     private int port;
-    private Map<Integer, Connection> connections = Collections.synchronizedMap(new HashMap<>());
+    private Set<Connection> connections = Collections.synchronizedSet(new HashSet<>());
     private LinkedBlockingDeque<Message> messages = new LinkedBlockingDeque<>();
 
     public MessageServer(int port){
@@ -18,12 +18,11 @@ public class MessageServer {
         new Thread(new Writer()).start();
         try (ServerSocket serverSocket = new ServerSocket(port)){
             System.out.println("Server started...");
-            Connection connection;
             //noinspection InfiniteLoopStatement
             while (true){
                 Socket socket = serverSocket.accept();
-                connection = new Connection(socket);
-                connections.put(connection.getClientId(), connection);
+                Connection connection = new Connection(socket);
+                connections.add(connection);
                 new Thread(new Reader(connection)).start();
             }
         }
@@ -40,17 +39,17 @@ public class MessageServer {
         public void run() {
             while (!Thread.currentThread().isInterrupted()) {
                 if (connection.getSocket().isClosed()) {
-                    connections.remove(connection.getClientId());
+                    connections.remove(connection);
                     Thread.currentThread().interrupt();
                 }
                 try {
                     Message message = connection.readMessage();
-                    message.setClientId(connection.getClientId());
+                    message.setId(connection.hashCode());
                     messages.put(message);
                 } catch (IOException | ClassNotFoundException | InterruptedException e) {
                     Thread.currentThread().interrupt();
-                    System.out.println("Клиент " + connection.getClientId() + " отключился");
-                    connections.remove(connection.getClientId());
+                    System.out.println("Клиент " + connection.getSocket().getInetAddress() + " отключился");
+                    connections.remove(connection);
                 }
             }
         }
@@ -63,10 +62,10 @@ public class MessageServer {
             while (!Thread.currentThread().isInterrupted()){
                 try {
                     Message message = messages.take();
-                    for (Map.Entry<Integer, Connection> entry : connections.entrySet()){
-                        if (entry.getKey() != message.getClientId() && !entry.getValue().getSocket().isClosed()) {
+                    for (Connection connection : connections){
+                        if (connection.hashCode() != message.getId() && !connection.getSocket().isClosed()) {
                             try {
-                                entry.getValue().sendMessage(message);
+                                connection.sendMessage(message);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
@@ -74,7 +73,6 @@ public class MessageServer {
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                    //TODO Сравнивать можно не id а сами объекты connection, помещая ссылку на объект connection в message
                 }
             }
         }
