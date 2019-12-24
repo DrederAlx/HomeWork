@@ -7,7 +7,7 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 public class MessageServer {
     private int port;
-    private Set<Connection> connections = Collections.synchronizedSet(new HashSet<>());
+    private Map<Integer, Connection> connections = Collections.synchronizedMap(new HashMap<>());
     private LinkedBlockingDeque<Message> messages = new LinkedBlockingDeque<>();
 
     public MessageServer(int port){
@@ -18,39 +18,46 @@ public class MessageServer {
         new Thread(new Writer()).start();
         try (ServerSocket serverSocket = new ServerSocket(port)){
             System.out.println("Server started...");
+            Connection connection;
             //noinspection InfiniteLoopStatement
             while (true){
                 Socket socket = serverSocket.accept();
-                Connection connection = new Connection(socket);
-                connections.add(connection);
-                new Thread(new Reader(connection)).start();
+                connection = new Connection(socket);
+
+                for (int i = -1; i < connections.size(); i++) {
+                    if (!connections.containsKey(i+1)) {
+                        connections.put(i+1, connection);
+                        new Thread(new Reader(i+1)).start();
+                        break;
+                    }
+                }
+                System.out.println(connections.entrySet());
             }
         }
     }
 
     class Reader implements Runnable{
-        private Connection connection;
+        private int key;
 
-        public Reader(Connection connection) {
-            this.connection = connection;
+        public Reader(int key) {
+            this.key = key;
         }
 
         @Override
         public void run() {
             while (!Thread.currentThread().isInterrupted()) {
-                if (connection.getSocket().isClosed()) {
-                    connections.remove(connection);
+                if (connections.get(key).getSocket().isClosed()) {
+                    connections.remove(key);
                     Thread.currentThread().interrupt();
                 }
                 try {
-                    Message message = connection.readMessage();
-                    message.setId(connection.hashCode());
+                    Message message = connections.get(key).readMessage();
+                    message.setId(key);
                     messages.put(message);
                 } catch (IOException | ClassNotFoundException | InterruptedException e) {
                     Thread.currentThread().interrupt();
-                    System.out.println("Клиент " + connection.getSocket().getInetAddress() + " : " +
-                            connection.getSocket().getPort() + " отключился");
-                    connections.remove(connection);
+                    System.out.println("Клиент " + key + " отключился");
+                    connections.remove(key);
                 }
             }
         }
@@ -63,10 +70,10 @@ public class MessageServer {
             while (!Thread.currentThread().isInterrupted()){
                 try {
                     Message message = messages.take();
-                    for (Connection connection : connections){
-                        if (connection.hashCode() != message.getId() && !connection.getSocket().isClosed()) {
+                    for (Map.Entry<Integer, Connection> entry : connections.entrySet()){
+                        if (entry.getKey() != message.getId() && !entry.getValue().getSocket().isClosed()) {
                             try {
-                                connection.sendMessage(message);
+                                entry.getValue().sendMessage(message);
                             } catch (IOException e) {
                                 e.printStackTrace();
                             }
