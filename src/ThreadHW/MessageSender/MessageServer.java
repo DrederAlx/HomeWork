@@ -55,9 +55,9 @@ public class MessageServer {
                     message.setId(key);
                     messages.put(message);
                 } catch (IOException | ClassNotFoundException | InterruptedException e) {
-                    Thread.currentThread().interrupt();
                     System.out.println("Клиент " + key + " отключился");
                     connections.remove(key);
+                    Thread.currentThread().interrupt();
                 }
             }
         }
