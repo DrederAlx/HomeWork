@@ -6,9 +6,9 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 
 public class Connection implements AutoCloseable {
-    private Socket socket;
-    private ObjectOutputStream out;
-    private ObjectInputStream in;
+    private final Socket socket;
+    private final ObjectOutputStream out;
+    private final ObjectInputStream in;
 
     public Connection(Socket socket) throws IOException {
         this.socket = socket;

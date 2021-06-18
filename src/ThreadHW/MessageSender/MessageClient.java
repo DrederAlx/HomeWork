@@ -6,9 +6,9 @@ import java.util.Properties;
 import java.util.Scanner;
 
 public class MessageClient {
-    private String server;
-    private int port;
-    private Scanner scanner;
+    private final String server;
+    private final int port;
+    private final Scanner scanner;
 
     public MessageClient(String server, int port) {
         this.server = server;
@@ -40,8 +40,8 @@ public class MessageClient {
         }
     }
 
-    class Reader implements Runnable {
-        private Connection connection;
+    static class Reader implements Runnable {
+        private final Connection connection;
 
         public Reader(Connection connection) {
             this.connection = connection;
@@ -57,7 +57,6 @@ public class MessageClient {
                         Thread.currentThread().interrupt();
                     System.out.println("Подключение разорвано");
                     }
-
                 }
             }
         }
