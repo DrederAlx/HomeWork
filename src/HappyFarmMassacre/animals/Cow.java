@@ -1,7 +1,8 @@
 package HappyFarmMassacre.animals;
 
 public class Cow extends HomeAnimal {
-    public Cow(int weight, int speed, String name, int health, int resources, boolean eatable, int maxHealth, int maxResources) {
+    public Cow(int weight, int speed, String name, int health, int resources, boolean eatable,
+               int maxHealth, int maxResources) {
         super(weight, speed, name, health, resources, eatable, maxHealth, maxResources);
         setWeight(weight);
         setSpeed(speed);

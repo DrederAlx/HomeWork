@@ -6,9 +6,9 @@ import java.util.*;
 import java.util.concurrent.LinkedBlockingDeque;
 
 public class MessageServer {
-    private int port;
-    private Map<Integer, Connection> connections = Collections.synchronizedMap(new HashMap<>());
-    private LinkedBlockingDeque<Message> messages = new LinkedBlockingDeque<>();
+    private final int port;
+    private final Map<Integer, Connection> connections = Collections.synchronizedMap(new HashMap<>());
+    private final LinkedBlockingDeque<Message> messages = new LinkedBlockingDeque<>();
 
     public MessageServer(int port){
         this.port = port;
@@ -25,19 +25,18 @@ public class MessageServer {
                 connection = new Connection(socket);
 
                 for (int i = -1; i < connections.size(); i++) {
-                    if (!connections.containsKey(i+1)) {
-                        connections.put(i+1, connection);
-                        new Thread(new Reader(i+1)).start();
+                    if (!connections.containsKey(i + 1)) {
+                        connections.put(i + 1, connection);
+                        new Thread(new Reader(i + 1)).start();
                         break;
                     }
                 }
-                System.out.println(connections.entrySet());
             }
         }
     }
 
     class Reader implements Runnable{
-        private int key;
+        private final int key;
 
         public Reader(int key) {
             this.key = key;
@@ -87,7 +86,7 @@ public class MessageServer {
     }
 
     public static void main(String[] args) {
-        int port = 8090;
+        int port = 8741;
         MessageServer messageServer = new MessageServer(port);
         try {
             messageServer.start();

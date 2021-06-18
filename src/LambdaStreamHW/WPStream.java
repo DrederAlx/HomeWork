@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class WPStream {
 
@@ -15,10 +16,8 @@ public class WPStream {
         File file = new File("resources/wp.txt");
 
         Map<String, Long> map = null;
-        try {
-            map = Files
-                    .lines(file.toPath())
-                    .parallel()
+        try (Stream<String> stream = Files.lines(file.toPath()).parallel()) {
+            map = stream
                     .map(line -> line
                             .replaceAll("'", "")
                             .replaceAll("[0-9]", "")

@@ -9,7 +9,7 @@ public class Farm {
 
     public void addHomeAnimals() {
         int animalId;
-        HomeAnimal newAn = null;
+        HomeAnimal newAn;
         for (int i = 0; i < homeAnimals.length; i++) {
             animalId = (int) (Math.random() * 3) + 1;
             switch (animalId) {
@@ -34,7 +34,7 @@ public class Farm {
     }
 
     public void addWildAnimals() {
-        WildAnimal newAn = null;
+        WildAnimal newAn;
         for (int i = 0; i < wildAnimals.length; i++) {
             switch (i) {
                 case 0:
@@ -111,13 +111,12 @@ public class Farm {
     }
 
     public boolean ticketCheck() {
-        boolean ticketCheck = false;
         for (int i = 0; i < wildAnimals.length; i++) {
             if (wildAnimals[i].getFarmTicket() > 0) {
-                ticketCheck = true;
+                return true;
             }
         }
-        return ticketCheck;
+        return false;
     }
 
     public WildAnimal visitorChooser () {

@@ -71,8 +71,8 @@ public class MessageClient {
                 properties.load(inputStream);
             }
 
-            String server = properties.getProperty("server");//"127.0.0.1";
-            int port = Integer.parseInt(properties.getProperty("port")); //8090;
+            String server = properties.getProperty("server.ip");//"127.0.0.1";
+            int port = Integer.parseInt(properties.getProperty("server.port")); //8090;
             System.out.println(server);
             MessageClient messageClient = new MessageClient(server, port);
             messageClient.start();
